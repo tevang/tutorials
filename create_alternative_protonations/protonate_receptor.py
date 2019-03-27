@@ -8,6 +8,9 @@ __email__="tevang3@gmail.com"
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from itertools import combinations, permutations
 import sys, gc, os
+from operator import itemgetter
+from ete3 import Tree
+
 
 ## Parse command line arguments
 def cmdlineparse():
@@ -16,28 +19,23 @@ DESCRIPTION:
 
 This is a Python script to create all alternative protonation state combinations of a protein given a ligand and a specified radius. 
 It could be useful in case you have a receptor but you are not sure about the protonation states of some residues in the binding site 
-and you want to do docking of MD using all of them.
+and you want to do docking, MD, or any other structure-based drug design method using all of alternative receptor protonations.
 
-The script must be executed with UCSF Chimera, which searches for protonatable standard residues (ASP, GLU, HIS) around the ligand, 
-finds all possible combinations of protonation states, and writes a pdb file for each combination. Since the number of combinations 
-of more than 4 protonatable residues becomes very large, the user can fix some residues to a give protonated/unprotonated state. See 
-the examples below.
+The script must be executed with PyChimera, a Python wrappen of UCSF Chimera, which searches for protonatable standard residues (ASP, GLU, HIS) 
+around the ligand, finds all possible combinations of protonation states, and writes a pdb file for each combination. Since the number 
+of combinations of more than 6 protonatable residues becomes very large, the user can fix some residues to a give protonated/unprotonated state. 
+See the examples below. You can also get the same info by typing `protonate_receptor.py -h`.
 
-### EXAMPLE 1: list all protonatable residues within 8 Angstroms from the ligand.
+                         """,
+                            epilog="""
+### EXAMPLE 1: list all protonatable residues within 4 Angstroms from the ligand.
+pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -list
 
-`chimera --nogui --nostatus --script "$(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 8.0 -list"`
-
-### EXAMPLE 2: keep GLU_34.B, ASP_30.B, ASP_29.B, ASP_29.A, and ASP_30.A fixed, and create alternative protonations for all the rest 
-(namely ASP_25.B and ASP_25.A).
-`chimera --nogui --nostatus --script "$(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -fix GLU_34.B -fix ASP_30.B -fix ASP_29.B -fix ASP_29.A -fix ASP_30.A"`
+### EXAMPLE 2: keep ASP_29.A ASP_30.A fixed to the unprotonated state and create alternative protonations for all the rest.
+pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -fix ASP_29.A -fix ASP_30.A
 
 ### EXAMPLE 3: protonate all protein residues.
-`chimera --nogui --nostatus --script "$(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf"`
-                            """,
-                            epilog="""
-EXAMPLE:
-
-chimera --nogui --nostatus --script "$(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 8.0"
+pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf   
 
     """)
     parser.add_argument("-list", dest="LIST_PROTONATABLE", required=False, default=False, action='store_true',
@@ -61,44 +59,27 @@ chimera --nogui --nostatus --script "$(which protonate_receptor.py) -rec 1a30_pr
 
 ########################################################## FUNCTION DEFINITIONS ####################################################
 
-def change_protonation(remaining_residues):
-    if not remaining_residues:
-        global pdb_num
-        rc("del H")
-        rc("addh")
-        ### For Debugging
-        # print "List of current models:"
-        # rc("list models")
-        # print "List of current selections:"
-        # rc("list selection level residue")
-        ###
-        rc("write format pdb #0 prot%d.pdb" % (pdb_num))
-        pdb_num += 1
-        return
-    r = remaining_residues[0]
-    if r.type == "GLU":
-        states = ["GLU", "GLH"]
-    elif r.type == "ASP":
-        states = ["ASP", "ASH"]
-    elif r.type == "HIS":
-        states = ["HIE", "HID", "HIP"]
-    else:
-        states = [r.type]
-    for state in states:
-        r.type = state
-        change_protonation(remaining_residues[1:])
+def write_protonated_structure(protonations):
 
-def protonation(remaining_resids):
-    global residue_states, state_dict
-    if not remaining_resids:
-        return
-    resid = remaining_resids[0]
-    states = residue_states[resid]
-    for state in states:
-        state_dict[resid] = state
-        print state_dict
-        protonation(remaining_resids[1:])
+    global residues, args
 
+    id2state = {}
+    pdb = args.RECEPTOR.replace(".pdb", "")
+    for rstate in protonations:
+        state, resid = rstate.split('_')
+        id2state[resid] = state
+        pdb += "_%s%s" % (state , resid.replace(".",""))
+    pdb += ".pdb"
+    # Alter the protonation states
+    for r in residues:
+        try:
+            r.type = id2state[str(r.id)]
+        except KeyError:
+            continue
+    # Write the structure
+    rc("del H")
+    rc("addh")
+    rc("write format pdb #0 %s" % pdb)
 
 def populate_leaves(Peptide_Tree, resid, residue_states):
     """
@@ -131,7 +112,7 @@ def populate_leaves(Peptide_Tree, resid, residue_states):
 
 def build_Protonation_Tree(peptide, residue_states):
 
-    print "Building Protonation Trees from peptide %s" % peptide
+    print "Building Protonation Trees from peptide %s" % list(peptide)
     expand_tree = True
     Peptide_Tree = Tree()
     Root = Peptide_Tree.get_tree_root()
@@ -153,10 +134,14 @@ def build_Protonation_Tree(peptide, residue_states):
     all_protonations_set = set()
     for leaf in Peptide_Tree.iter_leaves():
         protonations = []
-        protonations.append("%s_%s" % (leaf.state, leaf.name))
+        resid, chain = leaf.name.split(".")
+        protonations.append((leaf.state, resid, chain))
         for ancestor in leaf.get_ancestors()[:-1]:  # skip the root
-            protonations.append("%s_%s" % (ancestor.state, ancestor.name))
-        all_protonations_set.add(tuple(reversed(protonations)))
+            resid, chain = ancestor.name.split(".")
+            protonations.append((ancestor.state, resid, chain))
+        protonations.sort(key=itemgetter(2, 1))     # sort by chain and resid to avoid permutations of the same combination
+        protonations = tuple(["%s_%s.%s" % (t[0], t[1], t[2]) for t in protonations])
+        all_protonations_set.add(protonations)
         del protonations
         del ancestor
         del leaf
@@ -174,7 +159,6 @@ if __name__ == "__main__":
     from chimera import runCommand as rc
     from chimera.selection import currentResidues
 
-    pdb_num = 1
     rc("open %s" % args.RECEPTOR)   # load the receptor
     rc("open %s" % args.LIGAND) # load the ligand
     if args.RADIUS > 0:
@@ -200,7 +184,7 @@ if __name__ == "__main__":
             protonatable_resnames.append(r.type)
         else:
             states = [r.type]
-        residue_states[r.id] = states
+        residue_states[str(r.id)] = states
 
     if args.LIST_PROTONATABLE:
         protonatable_rstates = ["%s_%s" % (name,id) for name,id in zip(protonatable_resnames, protonatable_resids)]
@@ -208,19 +192,23 @@ if __name__ == "__main__":
         sys.exit(0)
 
 
-    # for p in args.PYTHONPATH.split(':'):
-    #     sys.path.insert(0, p)
-    # os.environ['PYTHONPATH'] = args.PYTHONPATH
-    # print sys.path
-    from ete3 import Tree
-
     for rstate in args.FIXED_STATES:
         state, resid = rstate.split('_')
         residue_states[resid] = [state]
-        protonatable_resids.remove(resid)
+        try:
+            protonatable_resids.remove(resid)
+            print "Fixed resid %s to %s state." % (resid, state)
+        except ValueError:
+            print "Warning: residue %s is not within the specified distance from the ligand or is not a valid residue, " \
+                  "therefore it will be ignored." % rstate
 
     all_protonations = set()
     for peptide in permutations(protonatable_resids, len(protonatable_resids)):
         all_protonations = all_protonations.union(build_Protonation_Tree(peptide, residue_states))
 
-    print all_protonations
+    # Finally create and write the protonated structures
+    all_protonations = list(all_protonations)
+    all_protonations.sort(key=lambda x: x.count)
+    for protonations in all_protonations:
+        print "Writing structure with the following protonation states: ", protonations
+        write_protonated_structure(protonations)
