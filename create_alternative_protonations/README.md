@@ -6,17 +6,23 @@ The script must be executed with [PyChimera](https://pychimera.readthedocs.io/en
 
 ## INSTALLATION
 ```
-conda create -n ete3 -c insilichem pychimera
+conda create -n ete3 -c insilichem pychimera	# this will modify your ~/.bashrc thus you have to source it again
+source ~/.bashrc
 conda activate ete3
-pychimera -c "import ete3"
-pip install --upgrade numpy
+pip install ete3
+pip install --upgrade numpy			# upgrade numpy to match the version that ete3 needs
 ```
+Finally add the path to `protonate_receptor.py` to your `PATH` variable and create a symbolic link, like `sudo ln -s [full path to protonate_receptor.py] /usr/local/bin/`. 
 
 ## TUTORIAL
 
 Download the pdb structure of HIV-1 protease complexed with a tripeptide inhibitor from [PDB](https://www.rcsb.org/structure/1A30). Save the receptor coordinates to file "1a30_receptor.pdb" and the ligand coordinates to a file "1a30_ligand.sdf". Then, list all protonatable residues within 4 Angstroms from the ligand.
 
-`pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -list`
+```
+source ~/.bashrc	# necessary only if you haven't sourced the lated modified version
+conda activate ete3
+pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -list
+```
 
 You should get that the protonatable residues are: ASP_25.B ASP_25.A ASP_29.A ASP_30.A. We want to keep ASP_29.A ASP_30.A fixed to the unprotonated state and create alternative protonations for all the rest (namely the catalytic dyad ASP_25.B and ASP_25.A).
 
@@ -31,6 +37,6 @@ The script will generate 4 files in the current directory, from which we are int
 which correspond to the structures shown in the figure below.
 ![3 alternative protonation states of the catalytic dyad in the HIV-1 protease.](images/1a30_all_protonations.png)
 
-The doubly protonated catalytic dyad does not exist. In general, the acid driven catalysis requires that one of the members of the Asp dyad would be ionized in order to 
+The doubly protonated catalytic dyad does not exist. In general, the acid driven catalysis requires that one of the members of the Asp dyad to be ionized in order to 
 activate the water molecule for the nucleophilic attack, while the second member needs to be protonated in order to enhance the electrophilic nature of the substrate 
 carbonyl group.
