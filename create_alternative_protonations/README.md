@@ -40,3 +40,6 @@ which correspond to the structures shown in the figure below.
 The doubly protonated catalytic dyad does not exist. In general, the acid driven catalysis requires that one of the members of the ASP dyad is ionized in order to 
 activate the water molecule for the nucleophilic attack, while the second member needs to be protonated in order to enhance the electrophilic nature of the substrate 
 carbonyl group.
+
+To deactivate the `ete3` conda virtual environment and switch to your default:
+`source deactivate ete3`
