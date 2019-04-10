@@ -26,7 +26,7 @@ or to add hydrogens with the command
 ```
 addh
 ```
-and then select **Surface/Binding Analysis->Electrostatic Surface Coloring**, and under **potential file** select the .dx file. I will leave the default values, namely the surface will be colored with a color scale from -7 eV to 7 eV, with red representing negative charge, white neutral and blue positive. The charge value shown is that on the solvent
+and then select **Surface/Binding Analysis->Electrostatic Surface Coloring**, and under **potential file** select the .dx file. I will leave the default values, namely the surface will be colored with a color scale from -10 eV to 10 eV, with red representing negative charge, white neutral and blue positive. The charge value shown is that on the solvent
 accessible surface of the protein, namely 1.4 Å far from the surface.
 
 Now we will try to focus on the binding pocket. Load the ligand file `3K5C-BACE_1.mol` and use the **Tools->Depiction->Per-Model Clipping** utility to make tomographies of the EP map while mentaining the cartoon representation of the protein. Experiment with **Enable clipping** and **Adjust clipping with mouse as below** options both activated. Use the middle and right mouse buttons to rotate and shift the clipping place, respectively.
