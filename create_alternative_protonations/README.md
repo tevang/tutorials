@@ -6,7 +6,7 @@ The script must be executed with [PyChimera](https://pychimera.readthedocs.io/en
 
 ## INSTALLATION
 ```
-conda create -n ete3 -c insilichem pychimera	# this will modify your ~/.bashrc thus you have to source it again
+conda create -n ete3 -c insilichem pychimera	# this will create a virtual environment for PyChimera and modify your ~/.bashrc thus you have to source it again
 source ~/.bashrc
 conda activate ete3
 pip install ete3

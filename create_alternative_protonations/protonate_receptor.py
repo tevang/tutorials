@@ -26,6 +26,9 @@ around the ligand, finds all possible combinations of protonation states, and wr
 of combinations of more than 6 protonatable residues becomes very large, the user can fix some residues to a give protonated/unprotonated state. 
 See the examples below. You can also get the same info by typing `protonate_receptor.py -h`.
 
+TODO: add optional support for LYS and CYS protonated forms.
+https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/addh/addh.html
+
                          """,
                             epilog="""
 ### EXAMPLE 1: list all protonatable residues within 4 Angstroms from the ligand.
@@ -53,6 +56,19 @@ pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.
                         help="the residue to fixed to one state. E.g. '-fix ASP_30.A GLH_24.B' will NOT produce any structure with"
                              "ASH_30.A or GLU_24.B. This is useful when you have >4 protonatable residues within the binding site"
                              " and you want to reduce the number of combinations.")
+    parser.add_argument("-flipcooh", dest="FLIP_COOH", required=False, default=False, action='store_true',
+                        help="Flip the carboxylic group of ASH and GLH by 180 degrees. This will produced an order of magnitude "
+                             "more combinations, therefore use with caution. For example, if you do an energy minimization "
+                             "before scoring, it will hopefully suffice (hopefully it will flip the COOH if needed). If not, then "
+                             "use this option.")
+    parser.add_argument("-dockprep", dest="DOCKPREP", required=False, default=False, action='store_true',
+                        help="Prepare the receptor for docking or MD. Namely:"
+                             "1) delete water molecules, "
+                             "2) repaire truncated sidechains, "
+                             "3) add hydrogens, "
+                             "4) assign partial charges (protein amberSB14, ligand AM1). "
+                             "Also for each protonation state combination write a pdb file that contains the protein+ligand and the first 2 lines"
+                             " will be comments that state the net charge of the receptor and the ligand, respectively.")
 
     args = parser.parse_args()
     return args
@@ -68,18 +84,67 @@ def write_protonated_structure(protonations):
     for rstate in protonations:
         state, resid = rstate.split('_')
         id2state[resid] = state
+        if args.FLIP_COOH:
+            state = state.replace("1", "a").replace("2", "b")
         pdb += "_%s%s" % (state , resid.replace(".",""))
     pdb += ".pdb"
     # Alter the protonation states
+    ASH_GLH_rstates = []
     for r in residues:
         try:
-            r.type = id2state[str(r.id)]
+            r.type = id2state[str(r.id)][:3]    # works for both ASH and ASH1
+            if id2state[str(r.id)][:3] in ["ASH", "GLH"]:
+                ASH_GLH_rstates.append((str(r.id), id2state[str(r.id)]))
         except KeyError:
             continue
+
+    if args.FLIP_COOH:
+        for resid, state in ASH_GLH_rstates:
+            if state == 'GLH1':    # rename the atoms, because by default proton goes to O[DE]2 but we want it in O[DE]1
+                rc("setattr a name XX :%s@OE1" % resid)
+                rc("setattr a name OE1 :%s@OE2" % resid)
+                rc("setattr a name OE2 :%s@XX" % resid)
+            if state == 'ASH1':    # rename the atoms, because by default proton goes to O[DE]2 but we want it in O[DE]1
+                rc("setattr a name XX :%s@OD1" % resid)
+                rc("setattr a name OD1 :%s@OD2" % resid)
+                rc("setattr a name OD2 :%s@XX" % resid)
+
     # Write the structure
     rc("del H")
     rc("addh")
-    rc("write format pdb #0 %s" % pdb)
+    if args.DOCKPREP:   # prepend net charges to the pdb file
+        pdb = pdb.replace(".pdb", "_complex.pdb")
+        rc("combine #0,1 name complex modelId 2")
+        rc("write format pdb #2 %s" % pdb)
+        rc("delete #2")
+        models = chimera.openModels.list(modelTypes=[chimera.Molecule])
+        rc("addcharge std spec #0") # re-add ff14SB charges to the protonated receptor only (the ligand protonation did not change)
+        rec_charge = estimateFormalCharge(models[0].atoms)
+        lig_charge = estimateFormalCharge(models[1].atoms)
+        # Neutralize system
+        net_charge = rec_charge+lig_charge
+        if net_charge < 0:
+            initiateAddions(models, "Na+", "neutralize", chimera.replyobj.status)
+        elif net_charge > 0:
+            initiateAddions(models, "Cl-", "neutralize", chimera.replyobj.status)
+        with open(pdb, "r+") as f:
+            s = f.read()
+            f.seek(0)
+            f.write("# receptor net charge = %i\n# ligand net charge = %i\n" % (-lig_charge, lig_charge))   # after system neutralization
+            f.write(s)
+    else:
+        rc("write format pdb #0 %s" % pdb)
+
+    if args.FLIP_COOH:  # restore the original O[DE] names
+        for resid, state in ASH_GLH_rstates:
+            if state == 'GLH1':    # rename the atoms, because by default proton goes to O[DE]2 but we want it in O[DE]1
+                rc("setattr a name XX :%s@OE1" % resid)
+                rc("setattr a name OE1 :%s@OE2" % resid)
+                rc("setattr a name OE2 :%s@XX" % resid)
+            if state == 'ASH1':    # rename the atoms, because by default proton goes to O[DE]2 but we want it in O[DE]1
+                rc("setattr a name XX :%s@OD1" % resid)
+                rc("setattr a name OD1 :%s@OD2" % resid)
+                rc("setattr a name OD2 :%s@XX" % resid)
 
 def populate_leaves(Peptide_Tree, resid, residue_states):
     """
@@ -159,8 +224,29 @@ if __name__ == "__main__":
     from chimera import runCommand as rc
     from chimera.selection import currentResidues
 
+
+    resname_states_dict = {
+        "GLU": ["GLU", "GLH"],
+        "ASP": ["ASP", "ASH"]
+    }
+
+    if args.FLIP_COOH:
+        resname_states_dict["GLU"] = ["GLU", "GLH1", "GLH2"]
+        resname_states_dict["ASP"] = ["ASP", "ASH1", "ASH2"]
+
     rc("open %s" % args.RECEPTOR)   # load the receptor
     rc("open %s" % args.LIGAND) # load the ligand
+
+    if args.DOCKPREP:
+        import chimera
+        from Addions import initiateAddions
+        from DockPrep import prep
+        from AddCharge import estimateFormalCharge
+        models = chimera.openModels.list(modelTypes=[chimera.Molecule])
+        print "Preparing receptor for docking and calculating ligand AM1 charges (may be slow)."
+        prep(models, nogui=True, method='am1')
+
+    # Select the residues to be protonated
     if args.RADIUS > 0:
         rc("sel #1 z<%f & ~ #1" % args.RADIUS)
     elif args.RADIUS == 0:
@@ -170,15 +256,15 @@ if __name__ == "__main__":
     protonatable_resids = []
     protonatable_resnames = []
     for r in residues:
-        if r.type == "GLU":
-            states = ["GLU", "GLH"]
+        if r.type in ["GLU", "GLH"]:
+            states = resname_states_dict["GLU"]
             protonatable_resids.append(str(r.id))
             protonatable_resnames.append(r.type)
-        elif r.type == "ASP":
-            states = ["ASP", "ASH"]
+        elif r.type in ["ASP", "ASH"]:
+            states = resname_states_dict["ASP"]
             protonatable_resids.append(str(r.id))
             protonatable_resnames.append(r.type)
-        elif r.type == "HIS":
+        elif r.type in ["HIS", "HIE", "HID", "HIP"]:
             states = ["HIE", "HID", "HIP"]
             protonatable_resids.append(str(r.id))
             protonatable_resnames.append(r.type)
