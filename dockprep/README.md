@@ -9,7 +9,7 @@ Sometimes you may need to rename atoms manually in Chimera (e.g. the N- and C-te
 For a full list of options run `dockprep.py -h`.
 
 
-You can launch the script either using [PyChimera](https://pychimera.readthedocs.io/en/latest/) (to install it read this tutorial) 
+You can launch the script either using [PyChimera](https://pychimera.readthedocs.io/en/latest/) (to install it read this [tutorial](https://github.com/tevang/tutorials/tree/master/create_alternative_protonations)) 
 ```
 pychimera $(which dockprep.py) -rec example_files/3K5C-BACE.pdb -lig $mol -cmethod gas -neut
 ```
