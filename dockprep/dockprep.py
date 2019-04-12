@@ -5,11 +5,8 @@ __email__="tevang3@gmail.com"
 
 
 
+import os
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-from itertools import combinations, permutations
-import sys, gc, os
-from operator import itemgetter
-from ete3 import Tree
 
 
 ## Parse command line arguments
@@ -17,7 +14,9 @@ def cmdlineparse():
     parser = ArgumentParser(formatter_class=RawDescriptionHelpFormatter, description="""
 DESCRIPTION:
 
-This is a Python script to prepare the receptor-ligand complex for scoring.
+This is a Python script to prepare the receptor-ligand complex for scoring. If you encounter problems with the input pdb file then try correcting it using:
+1) pdb4amber from AmberTools (https://github.com/Amber-MD/pdb4amber)
+2) pdbfixer (https://github.com/pandegroup/pdbfixer)
 
 TODO: add optional support for LYS and CYS protonated forms.
 https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/addh/addh.html
