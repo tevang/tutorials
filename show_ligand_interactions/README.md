@@ -44,5 +44,5 @@ make_figure ligand_interactions.png, single, size=900, opaque
 
 ### Some other example Figures generated using "show_ligand_interactions".
 ![CatS ligand interactions](image_gallery/CatS_335_liginter.jpg)
-
+![BACE ligand interactions](image_gallery/BACE_104_liginter.jpg)
 
