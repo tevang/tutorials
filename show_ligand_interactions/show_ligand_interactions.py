@@ -3,6 +3,7 @@
 # License: BSD-2-Clause
 
 from pymol import cmd, util
+import show_bumps
 
 def show_ligand_interactions(recsel="not hetatm", ligsel="hetatm", cutoff=5):
     """
@@ -20,12 +21,14 @@ ARGUMENTS
     """
     cmd.select('ligand', ligsel)
     cmd.select('receptor', recsel)
+
     cmd.bg_color('white')
     cmd.show_as('cartoon')
-    cmd.show_as('sticks', 'hetatm')
+    cmd.show_as('sticks', 'hetatm or ligand')
+    cmd.show_as('nonbonded', "resn HOH+T3P+WAT within %s of ligand" % cutoff)
     cmd.set('cartoon_transparency', 0.2)
     cmd.spectrum(selection=recsel+" or "+ligsel,byres=1)
-    util.cbag('not elem C')
+    util.cbag('not name C*')
     cmd.set('cartoon_fancy_helices', 1);
     cmd.show("sticks", "(hydro)");
     cmd.select("pocket", "byres (receptor within %s of ligand)" % cutoff);
@@ -39,5 +42,6 @@ ARGUMENTS
     # now set the label options
     cmd.set('label_size', 20)
     cmd.set('label_position', [0,0,10])
+    cmd.orient("ligand")
 
 cmd.extend('show_ligand_interactions', show_ligand_interactions)
