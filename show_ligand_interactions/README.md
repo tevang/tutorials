@@ -1,6 +1,6 @@
-# A new PyMOL command to visualize receptor-ligand interactions and create publication quality images. 
+# A new PyMOL command to visualize receptor-ligand interactions and create publication-quality images. 
 
-This script is also within the [Pymol-script-repo](https://pymolwiki.org/index.php/Git_install_scripts), which is I strongly recommend to install. In that case you just need to import it into PyMOL:
+This script is also within the [Pymol-script-repo](https://pymolwiki.org/index.php/Git_install_scripts), which I strongly recommend to install. In that case you just need to import it into PyMOL:
 ```
 import show_ligand_interactions
 ```
