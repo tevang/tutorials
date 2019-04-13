@@ -27,14 +27,11 @@ remove resn HOH
 import show_ligand_interactions
 show_ligand_interactions 2ZC9 and not resn 22U, 2ZC9 and resn 22U, 4
 ```
-![2ZC9 ligand interactions](image_gallery/2zc9_lig_interactions.png)
 
 Optionally, you can display the van der Walls overlaps by red disks.
 ```
 show_bumps pocket or ligand, clashes
 ```
-
-![2ZC9 ligand interactions and clashes](image_gallery/2zc9_interactions_clashes.png)
 
 Once you decide your favorable pose, you can save the image.
 ```
@@ -42,8 +39,10 @@ import make_figure
 make_figure ligand_interactions.png, single, size=900, opaque
 ```
 
+![2ZC9 ligand interactions](image_gallery/Thrombin_2zc9_liginter.jpg)
+
+
 ### Some other example Figures generated using "show_ligand_interactions".
-![CatS ligand interactions](image_gallery/CatS_335_lig_interactions.png)
-![CatS ligand interactions and clashes](image_gallery/CatS_335_lig_interactions_clashes.png)
-![2ZC9 ligand interactions](image_gallery/BACE_104_lig_interactions.png)
-![2ZC9 ligand interactions and clashes](image_gallery/BACE_104_lig_interactions_clashes.png)
+![CatS ligand interactions](image_gallery/CatS_335_liginter.jpg)
+![BACE ligand interactions](image_gallery/BACE_104_liginter.jpg)
+
