@@ -10,15 +10,15 @@ For a full list of options run `dockprep.py -h`.
 
 
 You can launch the script either using [PyChimera](https://pychimera.readthedocs.io/en/latest/) (to install it read this [tutorial](https://github.com/tevang/tutorials/tree/master/create_alternative_protonations)) 
-```
+```bash
 pychimera $(which dockprep.py) -rec example_files/3K5C-BACE.pdb -lig $mol -cmethod gas -neut
 ```
 or the vanilla UCSF Chimera executable.
-```
+```bash
 chimera --nogui --nostatus --script "$(which dockprep.py) -rec example_files/3K5C-BACE.pdb -lig example_files/3K5C-BACE_1.mol -cmethod gas -neut"
 ```
 To prepare multiple protein-ligand complexes with dockprep.py **in parallel** on the Unix Shel, first create a file with all the individual commands like this:
-```
+```bash
 for mol in $(ls example_files/*mol)
 do
 echo "chimera --nogui --nostatus --script \"$(which dockprep.py) -rec example_files/3K5C-BACE.pdb -lig $mol -cmethod gas -neut\""
@@ -26,6 +26,11 @@ done > commands.txt
 ```
 
 Then launch it using [GNU parallel script](https://www.gnu.org/software/parallel/)
-``` 
+``` bash
 parallel -j3 < commands.txt
+```
+
+Likewise, if you have the protein-ligand complex already saved in one file, you can you do all the above like this:
+```bash
+pychimera $(which dockprep.py) -complex complex.pdb -cmethod gas -neut
 ```

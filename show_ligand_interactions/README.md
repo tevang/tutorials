@@ -33,7 +33,7 @@ Optionally, you can display the van der Walls overlaps by red disks.
 show_bumps pocket or ligand, clashes
 ```
 
-Once you decide your favorable pose, you can save the image.
+Once you decide your favorite pose, you can save the image.
 ```
 import make_figure
 make_figure ligand_interactions.png, single, size=900, opaque

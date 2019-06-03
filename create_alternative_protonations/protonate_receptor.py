@@ -157,7 +157,8 @@ def populate_leaves(Peptide_Tree, resid, residue_states):
     """
 
     number_of_new_leaves = 0
-    for leaf, prev_resid in zip(Peptide_Tree.iter_leaves(), Peptide_Tree.iter_leaf_names()):
+    leaves = list(Peptide_Tree.iter_leaves())
+    for leaf in leaves:
         try:
             for state in residue_states[resid]:
                 new_child = leaf.add_child(name=resid)  # add a new brach to the current TOCSY add index (leaf) with length the respective probability
@@ -177,7 +178,7 @@ def populate_leaves(Peptide_Tree, resid, residue_states):
 
 def build_Protonation_Tree(peptide, residue_states):
 
-    print "Building Protonation Trees from peptide %s" % list(peptide)
+    print("Building Protonation Trees from peptide %s" % list(peptide))
     expand_tree = True
     Peptide_Tree = Tree()
     Root = Peptide_Tree.get_tree_root()
@@ -194,7 +195,7 @@ def build_Protonation_Tree(peptide, residue_states):
     # print Peptide_Tree.get_ascii(show_internal=True, compact=False)
     # print Peptide_Tree.get_ascii(show_internal=True, compact=False, attributes=["name", "dist", "occupancy", "numOfResonances"])
 
-    print "\nSaving protonations from Tree..."
+    print("\nSaving protonations from Tree...")
 
     all_protonations_set = set()
     for leaf in Peptide_Tree.iter_leaves():
@@ -243,7 +244,7 @@ if __name__ == "__main__":
         from DockPrep import prep
         from AddCharge import estimateFormalCharge
         models = chimera.openModels.list(modelTypes=[chimera.Molecule])
-        print "Preparing receptor for docking and calculating ligand AM1 charges (may be slow)."
+        print("Preparing receptor for docking and calculating ligand AM1 charges (may be slow).")
         prep(models, nogui=True, method='am1')
 
     # Select the residues to be protonated
@@ -274,7 +275,7 @@ if __name__ == "__main__":
 
     if args.LIST_PROTONATABLE:
         protonatable_rstates = ["%s_%s" % (name,id) for name,id in zip(protonatable_resnames, protonatable_resids)]
-        print "\n~~~ The protonatable residues within %.3f Angstroms from the ligand are: %s\n" % (args.RADIUS, " ".join(protonatable_rstates))
+        print("\n~~~ The protonatable residues within %.3f Angstroms from the ligand are: %s\n" % (args.RADIUS, " ".join(protonatable_rstates)))
         sys.exit(0)
 
 
@@ -283,10 +284,10 @@ if __name__ == "__main__":
         residue_states[resid] = [state]
         try:
             protonatable_resids.remove(resid)
-            print "Fixed resid %s to %s state." % (resid, state)
+            print("Fixed resid %s to %s state." % (resid, state))
         except ValueError:
-            print "Warning: residue %s is not within the specified distance from the ligand or is not a valid residue, " \
-                  "therefore it will be ignored." % rstate
+            print("Warning: residue %s is not within the specified distance from the ligand or is not a valid residue, " \
+                  "therefore it will be ignored." % rstate)
 
     all_protonations = set()
     for peptide in permutations(protonatable_resids, len(protonatable_resids)):
@@ -296,5 +297,5 @@ if __name__ == "__main__":
     all_protonations = list(all_protonations)
     all_protonations.sort(key=lambda x: x.count)
     for protonations in all_protonations:
-        print "Writing structure with the following protonation states: ", protonations
+        print("Writing structure with the following protonation states: ", protonations)
         write_protonated_structure(protonations)

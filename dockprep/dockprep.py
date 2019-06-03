@@ -34,6 +34,8 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
                         help="Method to calculate charges fo the ligand. Default: %(default)s")
     parser.add_argument("-neut", dest="NEUTRALIZE", required=False, default=False, action='store_true',
                         help="Neutralize the system by adding coutner ions.")
+    parser.add_argument("-stripions", dest="STRIP_IONS", required=False, default=False, action='store_true',
+                        help="Strip out all ions.")
     parser.add_argument("-rec", dest="RECEPTOR", required=False, default=None, type=str,
                         help="Instead of -complex give the pdb file with the apo form of the receptor.")
     parser.add_argument("-lig", dest="LIGAND", required=False, default=None, type=str,
@@ -55,6 +57,8 @@ if __name__ == "__main__":
 
     if args.COMPLEX:
         rc("open %s" % args.COMPLEX)  # load the protein-ligand complex
+        if args.STRIP_IONS:
+            rc("delete ions")
         rc("split #0 ligands")
         rc("sel #0.2")  # select the ligand
         ligres = currentResidues()[0]
@@ -68,6 +72,8 @@ if __name__ == "__main__":
     elif args.RECEPTOR and args.LIGAND:
         rc("open %s" % args.RECEPTOR)  # load the receptor
         rc("open %s" % args.LIGAND)  # load the ligand
+        if args.STRIP_IONS:
+            rc("delete ions")
         rc("sel #1")  # select the ligand
         ligres = currentResidues()[0]
         ligres.type = 'LIG'  # change the resname of the ligand to 'LIG'
@@ -76,7 +82,7 @@ if __name__ == "__main__":
         rc("del #0-2")
         pdb = os.path.splitext(os.path.basename(args.RECEPTOR))[0] + "_" + os.path.splitext(os.path.basename(args.LIGAND))[0] + "_prep.pdb"
 
-    print "Preparing receptor for docking and calculating ligand '%s' charges (may be slow)." % args.CHARGE_METHOD
+    print("Preparing receptor for docking and calculating ligand '%s' charges (may be slow)." % args.CHARGE_METHOD)
     models = chimera.openModels.list(modelTypes=[chimera.Molecule])
     prep(models, nogui=True, method=args.CHARGE_METHOD)
     net_charge = estimateFormalCharge(models[0].atoms)
@@ -102,12 +108,13 @@ if __name__ == "__main__":
     rc("combine #4.1 modelId 5")  # create a new molecule containing just the receptor
     rc("combine #4.2 modelId 6")  # create a new molecule containing just the ligand
     models = chimera.openModels.list(modelTypes=[chimera.Molecule])
-    # for m in models: print len(m.atoms), estimateFormalCharge(m.atoms)    # DEBUGGING
+    # for m in models: print(len(m.atoms), estimateFormalCharge(m.atoms)    # DEBUGGING
     rec_charge = estimateFormalCharge(models[3].atoms)
     lig_charge = estimateFormalCharge(models[4].atoms)
     rc("del #4-6")
 
     # Finally, write the complex pdb file with headers
+    rc("changechains B A all")  # <== OPTIONAL (ligand and protein will be chain A for homology modeling)
     rc("write format pdb #3 %s" % pdb)
     with open(pdb, "r+") as f:
         s = f.read()
