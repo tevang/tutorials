@@ -1,0 +1,71 @@
+---
+title: "Create ROC curves in R"
+author: "Thomas Evangelidis"
+date: "6/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Paste below all your score files. The first two columns must be the molname and the score (the lowest score the better, not the opposite!).
+
+```{r scores}
+RESULTS_FILES = c("data/PM6_COSMO.scores",
+                  "data/PM6_COSMO2.scores",
+                  "data/Smina.scores",
+                  "data/GlideSP.scores",
+                  "data/Vina.scores"
+)
+```
+
+Paste below all files with molecular bioactivities (1 or 0). First column must be the molname and the second its bioactivity.
+
+```{r activities}
+ACTIVITIES_FILES = c("data/PM6_COSMO.activities",
+                     "data/PM6_COSMO2.activities",
+                     "data/Smina.activities",
+                     "data/GlideSP.activities",
+                     "data/Vina.activities"
+)
+```
+
+
+Define a function to read PM6/COSMO scoring results and a file with the activity of each ligand (0 or 1)
+
+<!-- Save all custom functions into a file ('function_definitions.r') and load them into the R notebook. This is the only way to be able
+to resuse custom functions in other chuncks. The first chunk reads in fun.R using knitr::read_chunk. Later on, you can define an empty chunk that has the identifier that was used in fun.R as its name. This will act as if the contents of fun.R were written directly in this file. As you see, you can also use fun() in later chunks. --> 
+```{r,cache = FALSE, echo=FALSE}
+knitr::read_chunk("function_definitions.r")
+```
+
+
+```{r read_PM6_scores}
+```
+
+Load the required libraries and create ROC curve plots.
+
+```{r plot}
+library("ROCR")
+library("hash")
+
+COLORS <- rainbow(3*length(RESULTS_FILES))
+for (i in 1:length(RESULTS_FILES)) {
+  perf = read_PM6_scores(RESULTS_FILES[i], ACTIVITIES_FILES[i])
+  if (i==1) { plot(perf, add = FALSE, colorize = FALSE, lwd=3, col=COLORS[3*i], main="ROC Curves") }
+  else { plot(perf, add = TRUE, colorize = FALSE, lwd=3, col=COLORS[3*i]) }
+  # plot(perf2, add = TRUE, colorize = TRUE, lwd=3)
+  # plot(perf3, add = TRUE, colorize = TRUE, lwd=3)
+}
+
+abline(a=0, b=1, lty=2, lwd=3, col="black")
+# Add legend (NEEDS CUSTOM ADJUSTMENTS)
+legend(0.75, 0.25, legend=c("PM6/COSMO", "PM6/COSMO2", "SMINA", "GLIDE SP", "VINA"),
+       col=COLORS[seq(1, length(COLORS), 3)], lty=1, cex=0.8)
+```
+
+**IMPORTANT: You will need to adjust the last line `legend(...)` to have a legend with the right names at the right position.**
+
+
+
