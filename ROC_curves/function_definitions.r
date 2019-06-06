@@ -4,10 +4,8 @@
 library("ROCR")
 library("hash")
 
-## ---- read_PM6_scores
-read_PM6_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
-  # The function will automatically match molnames that have a valid score and a valid bioactivity, therefore files 
-  # RESULTS_FILE and ACTIVITIES_FILE do not need to contain exactly the same molecules.
+## ---- read_scores
+read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
   x = read.table(RESULTS_FILE, header = TRUE)
   colnames(x)[2] = "score"
   # ignore the other columns
@@ -17,7 +15,7 @@ read_PM6_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
   a = read.table(ACTIVITIES_FILE)
   colnames(a)[1] = "molname"
   colnames(a)[2] = "label"
-  label_dict = hash() # molname->bioactivity
+  label_dict = hash()
   for (i in seq(1, nrow(a))) { label_dict[a[i,1]] <- a[i,2] }
   scores <- rep(0, nrow(x))
   labels <- rep("", nrow(x))
@@ -27,7 +25,6 @@ read_PM6_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
     labels[i] <- label_dict[[molname]]
     i <- i+1
   }
-  predx = prediction(scores, labels)
-  perfx = performance(predx, 'tpr', 'fpr')
-  return(perfx)
+  pred = prediction(-1*scores, labels)  ;# IMPORTANT: -1* because the function prediction() assumes that the highest the score the better
+  return(pred)
 }

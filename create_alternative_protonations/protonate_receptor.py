@@ -124,7 +124,7 @@ def write_protonated_structure(protonations):
         # Neutralize system
         net_charge = rec_charge+lig_charge
         if net_charge < 0:
-            initiateAddions(models, "Na+", "neutralize", chimera.replyobj.status)
+            initiateAddions(q, "Na+", "neutralize", chimera.replyobj.status)
         elif net_charge > 0:
             initiateAddions(models, "Cl-", "neutralize", chimera.replyobj.status)
         with open(pdb, "r+") as f:
