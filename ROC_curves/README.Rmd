@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Paste below all your score files. The first two columns must be the molname and the score (the lowest score the better, not the opposite!). The code will ignore the rest of the columns, if they exist.
+Paste below all your score files. The first two columns must be the molname and the score (**the lowest score the better, not the opposite!**). The code will ignore the rest of the columns, if they exist.
 
 ```{r scores}
 RESULTS_FILES = c("data/SF1.scores",
