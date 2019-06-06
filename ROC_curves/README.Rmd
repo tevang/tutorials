@@ -85,6 +85,9 @@ legend(0.62, 0.28, legend=LNAMES,
        col=COLORS, lty=1, cex=0.8)
 ```
 
+
+The number in parenthesis after each name in the legend is the area under the ROC curve.
+
 **IMPORTANT: You will need to adjust the last line `legend(...)` to have a legend with the right names at the right position.**
 
 
