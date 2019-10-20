@@ -44,6 +44,8 @@ knitr::read_chunk("function_definitions.r")
 
 ```{r common_molnames}
 ```
+```{r count_actives_inactives}
+```
 ```{r read_scores}
 ```
 
@@ -59,10 +61,13 @@ COLORS <- rainbow(3*length(RESULTS_FILES))
 COLORS <- COLORS[seq(3, length(COLORS), 3)]
 
 valid_molnames <- common_molnames(RESULTS_FILES)  ; # molnames with scores by all scoring functions; only these will be used for plotting
+# Count and print the number of actives and inactives that are common in all score files
+num <- count_actives_inactives(ACTIVITIES_FILE, valid_molnames)
 for (i in 1:length(RESULTS_FILES)) {
   pred = read_scores(RESULTS_FILES[i], ACTIVITIES_FILE, valid_molnames)
   perf = performance(pred, 'tpr', 'fpr')
-  if (i==1) { plot(perf, add = FALSE, colorize = FALSE, lwd=3, col=COLORS[i], main="ROC Curves") }
+  if (i==1) { plot(perf, add = FALSE, colorize = FALSE, lwd=3, col=COLORS[i], 
+                   main=paste("ROC Curves (", num$actives, "actives,", num$inactives, "inactives)")) }
   else { plot(perf, add = TRUE, colorize = FALSE, lwd=3, col=COLORS[i]) }
 }
 

@@ -12,7 +12,7 @@ common_molnames <- function(RESULTS_FILES) {
   functions properly.
   "
   x = read.table(RESULTS_FILES[1], header = TRUE)
-  colnames(x)[1] = "molname"
+  colnames(x)[1] = "molname"  ; # add a column header and operate on x$molname, otherwise 'inersect' fails!
   valid_molnames <- unique(sort(x$molname)) ; # unique molnames
   for (i in 2:length(RESULTS_FILES)) {
     x = read.table(RESULTS_FILES[i], header = TRUE)
@@ -20,6 +20,21 @@ common_molnames <- function(RESULTS_FILES) {
     valid_molnames <- intersect(valid_molnames, x$molname)
   }
   return(valid_molnames)
+}
+
+## ---- count_actives_inactives
+count_actives_inactives <- function(ACTIVITIES_FILE, valid_molnames) {
+  a = read.table(ACTIVITIES_FILE)
+  colnames(a)[1] = "molname"
+  colnames(a)[2] = "label"
+  actives <- a$molname[a$label==1]
+  inactives <- a$molname[a$label==0]
+  active_num <- length(actives[actives %in% valid_molnames])
+  inactive_num <- length(inactives[actives %in% valid_molnames])
+  paste("The molecules that have been scored by all scoring functions consist of", active_num, "actives", 
+        " and", inactive_num, "inactives.")
+  num <- list(actives=active_num, inactives=inactive_num)
+  return(num)
 }
 
 ## ---- read_scores
