@@ -114,7 +114,7 @@ C16626477 -10.84088 nan nan nan
 C14476356 -10.84026 nan nan nan
 C14792634 -10.83622 nan nan nan
 C47418595 -10.83003 nan nan nan
-332742_CHEMBL200469 -10.82811 nan nan nan
+CHEMBL200469 -10.82811 nan nan nan
 C63350560 -10.82798 nan nan nan
 C08764322 -10.81822 nan nan nan
 C20905234 -10.81647 nan nan nan
@@ -476,7 +476,7 @@ C13616830 -10.18869 nan nan nan
 C12684243 -10.1864 nan nan nan
 C67237377 -10.18634 nan nan nan
 C04553020 -10.18548 nan nan nan
-332764_CHEMBL371915 -10.18396 nan nan nan
+CHEMBL371915 -10.18396 nan nan nan
 C20983430 -10.18051 nan nan nan
 C13115410 -10.18035 nan nan nan
 C09430874 -10.17977 nan nan nan
@@ -957,7 +957,7 @@ C57614162 -9.78143 nan nan nan
 C11682620 -9.78077 nan nan nan
 C12586583 -9.78054 nan nan nan
 C20151628 -9.77904 nan nan nan
-418966_CHEMBL399530 -9.77861 nan nan nan
+CHEMBL399530 -9.77861 nan nan nan
 C45379831 -9.7785 nan nan nan
 C35314801 -9.77798 nan nan nan
 C05092281 -9.77761 nan nan nan
@@ -1043,7 +1043,7 @@ C37246189 -9.72754 nan nan nan
 C00684054 -9.72696 nan nan nan
 C14200160 -9.72683 nan nan nan
 C22635486 -9.7266 nan nan nan
-332564_CHEMBL200628 -9.72636 nan nan nan
+CHEMBL200628 -9.72636 nan nan nan
 C13095258 -9.72544 nan nan nan
 C13149325 -9.72443 nan nan nan
 C38826457 -9.72429 nan nan nan
@@ -1145,7 +1145,7 @@ C02645040 -9.64935 nan nan nan
 C39363080 -9.64934 nan nan nan
 C04251547 -9.64857 nan nan nan
 C65322919 -9.64687 nan nan nan
-685747_CHEMBL1213899 -9.64677 nan nan nan
+CHEMBL1213899 -9.64677 nan nan nan
 C40067617 -9.64665 nan nan nan
 C04277958 -9.64632 nan nan nan
 C09617226 -9.64611 nan nan nan
@@ -1167,10 +1167,10 @@ C06416735 -9.63668 nan nan nan
 C20569708 -9.63619 nan nan nan
 C19869136 -9.63548 nan nan nan
 C00909718 -9.63537 nan nan nan
-346533_CHEMBL204734 -9.63444 nan nan nan
+CHEMBL204734 -9.63444 nan nan nan
 C40399371 -9.63444 nan nan nan
 C53417463 -9.63402 nan nan nan
-332551_CHEMBL200255 -9.634 nan nan nan
+CHEMBL200255 -9.634 nan nan nan
 C08283369 -9.63345 nan nan nan
 C41628565 -9.63225 nan nan nan
 C33312707 -9.63199 nan nan nan
@@ -1346,7 +1346,7 @@ C14533863 -9.53564 nan nan nan
 C32856350 -9.53519 nan nan nan
 C66679005 -9.53488 nan nan nan
 C34783335 -9.53424 nan nan nan
-315964_CHEMBL191074 -9.5336 nan nan nan
+CHEMBL191074 -9.5336 nan nan nan
 C06159913 -9.53318 nan nan nan
 C13247345 -9.53282 nan nan nan
 C09608249 -9.53237 nan nan nan
@@ -1421,7 +1421,7 @@ C60061527 -9.49392 nan nan nan
 C08649499 -9.49361 nan nan nan
 C64392068 -9.49226 nan nan nan
 C13264437 -9.49192 nan nan nan
-301178_CHEMBL178130 -9.49149 nan nan nan
+CHEMBL178130 -9.49149 nan nan nan
 C03600622 -9.49048 nan nan nan
 C08826016 -9.49019 nan nan nan
 C03307229 -9.48911 nan nan nan
@@ -1639,7 +1639,7 @@ C39354326 -9.36907 nan nan nan
 C17244181 -9.36901 nan nan nan
 C16383660 -9.36854 nan nan nan
 C00793229 -9.36824 nan nan nan
-518365_CHEMBL457042 -9.3679 nan nan nan
+CHEMBL457042 -9.3679 nan nan nan
 C65394079 -9.36781 nan nan nan
 C39361716 -9.36754 nan nan nan
 C38652479 -9.36713 nan nan nan
@@ -1695,7 +1695,7 @@ C33556632 -9.34292 nan nan nan
 C59086962 -9.3423 nan nan nan
 C13147954 -9.34193 nan nan nan
 C05222189 -9.3418 nan nan nan
-317091_CHEMBL364968 -9.34156 nan nan nan
+CHEMBL364968 -9.34156 nan nan nan
 C39558485 -9.34011 nan nan nan
 C59775221 -9.33971 nan nan nan
 C63351463 -9.33943 nan nan nan
@@ -1787,7 +1787,7 @@ C12426955 -9.29162 nan nan nan
 C57002715 -9.29132 nan nan nan
 C03600786 -9.29102 nan nan nan
 C22791239 -9.2908 nan nan nan
-419309_CHEMBL254875 -9.29021 nan nan nan
+CHEMBL254875 -9.29021 nan nan nan
 C01133268 -9.28891 nan nan nan
 C38741865 -9.28872 nan nan nan
 C20094992 -9.2881 nan nan nan
@@ -1840,7 +1840,7 @@ C21742719 -9.26456 nan nan nan
 C09518456 -9.26225 nan nan nan
 C21742661 -9.26091 nan nan nan
 C03400079 -9.26016 nan nan nan
-456075_CHEMBL453386 -9.26 nan nan nan
+CHEMBL453386 -9.26 nan nan nan
 C05395989 -9.25998 nan nan nan
 C13552592 -9.25987 nan nan nan
 C66679596 -9.25939 nan nan nan
@@ -1882,7 +1882,7 @@ C56762084 -9.24355 nan nan nan
 C36727029 -9.2435 nan nan nan
 C33170674 -9.24213 nan nan nan
 C59489015 -9.24132 nan nan nan
-312873_CHEMBL361078 -9.24087 nan nan nan
+CHEMBL361078 -9.24087 nan nan nan
 C44103929 -9.24032 nan nan nan
 C32937092 -9.24015 nan nan nan
 C04623325 -9.2401 nan nan nan
@@ -1941,7 +1941,7 @@ C04277901 -9.21323 nan nan nan
 C23259760 -9.21316 nan nan nan
 C39553964 -9.21255 nan nan nan
 C12126900 -9.21182 nan nan nan
-355859_CHEMBL386499 -9.2102 nan nan nan
+CHEMBL386499 -9.2102 nan nan nan
 C39594009 -9.2098 nan nan nan
 C12386553 -9.20946 nan nan nan
 C12289311 -9.20927 nan nan nan
@@ -2079,7 +2079,7 @@ C05188424 -9.13031 nan nan nan
 C58057333 -9.12906 nan nan nan
 C07365900 -9.12847 nan nan nan
 C12778941 -9.12843 nan nan nan
-355828_CHEMBL213801 -9.12756 nan nan nan
+CHEMBL213801 -9.12756 nan nan nan
 C02613993 -9.12745 nan nan nan
 C44102320 -9.12616 nan nan nan
 C16448911 -9.12582 nan nan nan
@@ -2179,7 +2179,7 @@ C59807103 -9.07682 nan nan nan
 C40016905 -9.07592 nan nan nan
 C08890557 -9.07567 nan nan nan
 C08419636 -9.07481 nan nan nan
-312874_CHEMBL362307 -9.0739 nan nan nan
+CHEMBL362307 -9.0739 nan nan nan
 C08386050 -9.07375 nan nan nan
 C61734342 -9.07354 nan nan nan
 C29719742 -9.07249 nan nan nan
@@ -2216,7 +2216,7 @@ C45723725 -9.05448 nan nan nan
 C36740770 -9.05433 nan nan nan
 C06443456 -9.05392 nan nan nan
 C19453837 -9.05385 nan nan nan
-355956_CHEMBL378338 -9.05377 nan nan nan
+CHEMBL378338 -9.05377 nan nan nan
 C52618919 -9.05272 nan nan nan
 C02637812 -9.05203 nan nan nan
 C25394194 -9.05135 nan nan nan
@@ -2233,7 +2233,7 @@ C16553892 -9.04763 nan nan nan
 C06974968 -9.04741 nan nan nan
 C52586786 -9.04739 nan nan nan
 C46772387 -9.04706 nan nan nan
-316850_CHEMBL424811 -9.04675 nan nan nan
+CHEMBL424811 -9.04675 nan nan nan
 C39160066 -9.04569 nan nan nan
 C40706258 -9.04472 nan nan nan
 C01516027 -9.04357 nan nan nan
@@ -2247,7 +2247,7 @@ C42342089 -9.04061 nan nan nan
 C59831324 -9.03978 nan nan nan
 C12779935 -9.03775 nan nan nan
 C38653213 -9.03709 nan nan nan
-316696_CHEMBL426446 -9.03675 nan nan nan
+CHEMBL426446 -9.03675 nan nan nan
 C19756364 -9.03645 nan nan nan
 C02601124 -9.03644 nan nan nan
 C15824164 -9.036 nan nan nan
@@ -2266,7 +2266,7 @@ C20392518 -9.02999 nan nan nan
 C41026290 -9.02979 nan nan nan
 C63349326 -9.02952 nan nan nan
 C12741566 -9.0292 nan nan nan
-419032_CHEMBL252164 -9.02907 nan nan nan
+CHEMBL252164 -9.02907 nan nan nan
 C59060655 -9.02864 nan nan nan
 C32448558 -9.02861 nan nan nan
 C09793790 -9.0278 nan nan nan
@@ -2289,12 +2289,12 @@ C13113411 -9.02085 nan nan nan
 C20532149 -9.02082 nan nan nan
 C67101681 -9.02071 nan nan nan
 C03100187 -9.02066 nan nan nan
-355926_CHEMBL379544 -9.02047 nan nan nan
+CHEMBL379544 -9.02047 nan nan nan
 C65829132 -9.02046 nan nan nan
 C63752443 -9.02003 nan nan nan
 C41301761 -9.0189 nan nan nan
 C40399524 -9.01881 nan nan nan
-317061_CHEMBL366215 -9.01864 nan nan nan
+CHEMBL366215 -9.01864 nan nan nan
 C15191021 -9.01864 nan nan nan
 C39272139 -9.01815 nan nan nan
 C03457549 -9.01734 nan nan nan
@@ -2303,7 +2303,7 @@ C09297999 -9.01592 nan nan nan
 C38688942 -9.01556 nan nan nan
 C06525616 -9.01539 nan nan nan
 C66953084 -9.01459 nan nan nan
-685746_CHEMBL1213898 -9.01325 nan nan nan
+CHEMBL1213898 -9.01325 nan nan nan
 C19756050 -9.01118 nan nan nan
 C60374489 -9.01116 nan nan nan
 C33141167 -9.01088 nan nan nan
@@ -2354,7 +2354,7 @@ C59400725 -8.98692 nan nan nan
 C15414470 -8.9869 nan nan nan
 C13510100 -8.98648 nan nan nan
 C40760568 -8.98571 nan nan nan
-346173_CHEMBL208239 -8.98467 nan nan nan
+CHEMBL208239 -8.98467 nan nan nan
 C04794597 -8.98435 nan nan nan
 C23041848 -8.98389 nan nan nan
 C59335115 -8.98332 nan nan nan
@@ -2417,7 +2417,7 @@ C14459375 -8.9606 nan nan nan
 C32923852 -8.96041 nan nan nan
 C10864507 -8.95987 nan nan nan
 C05179291 -8.95859 nan nan nan
-518363_CHEMBL454733 -8.95712 nan nan nan
+CHEMBL454733 -8.95712 nan nan nan
 C20284457 -8.95662 nan nan nan
 C66080561 -8.95576 nan nan nan
 C65747944 -8.95559 nan nan nan
@@ -2431,7 +2431,7 @@ C08610103 -8.9506 nan nan nan
 C06151124 -8.95047 nan nan nan
 C13639570 -8.95012 nan nan nan
 C39363003 -8.94965 nan nan nan
-419311_CHEMBL404630 -8.94929 nan nan nan
+CHEMBL404630 -8.94929 nan nan nan
 C18083288 -8.94892 nan nan nan
 C06058938 -8.94854 nan nan nan
 C15892272 -8.94822 nan nan nan
@@ -2441,7 +2441,7 @@ C57545489 -8.94611 nan nan nan
 C66698547 -8.94569 nan nan nan
 C45873259 -8.9453 nan nan nan
 C50846796 -8.94491 nan nan nan
-418968_CHEMBL251974 -8.94467 nan nan nan
+CHEMBL251974 -8.94467 nan nan nan
 C33551532 -8.94441 nan nan nan
 C01754259 -8.94388 nan nan nan
 C35883632 -8.94269 nan nan nan
@@ -2464,7 +2464,7 @@ C58885780 -8.93413 nan nan nan
 C40760344 -8.93401 nan nan nan
 C63786869 -8.93373 nan nan nan
 C12613640 -8.93329 nan nan nan
-419308_CHEMBL402712 -8.93305 nan nan nan
+CHEMBL402712 -8.93305 nan nan nan
 C12371481 -8.93299 nan nan nan
 C17983177 -8.93278 nan nan nan
 C39412904 -8.93194 nan nan nan
@@ -2539,7 +2539,7 @@ C45513233 -8.89468 nan nan nan
 C36339707 -8.89452 nan nan nan
 C22000900 -8.89448 nan nan nan
 C37426547 -8.89447 nan nan nan
-518364_CHEMBL517583 -8.89308 nan nan nan
+CHEMBL517583 -8.89308 nan nan nan
 C38076426 -8.8925 nan nan nan
 C37136997 -8.89042 nan nan nan
 C25069478 -8.88914 nan nan nan
@@ -2609,7 +2609,7 @@ C08868608 -8.851 nan nan nan
 C41021890 -8.85087 nan nan nan
 C42356405 -8.85086 nan nan nan
 C66873466 -8.8505 nan nan nan
-355794_CHEMBL213262 -8.84969 nan nan nan
+CHEMBL213262 -8.84969 nan nan nan
 C11392881 -8.84961 nan nan nan
 C12058379 -8.84908 nan nan nan
 C04613400 -8.84906 nan nan nan
@@ -2635,7 +2635,7 @@ C28034151 -8.84034 nan nan nan
 C67469724 -8.83903 nan nan nan
 C39680110 -8.83891 nan nan nan
 C66956846 -8.83856 nan nan nan
-316695_CHEMBL371380 -8.83731 nan nan nan
+CHEMBL371380 -8.83731 nan nan nan
 C09271200 -8.83672 nan nan nan
 C12372930 -8.83595 nan nan nan
 C20896531 -8.83533 nan nan nan
@@ -2648,7 +2648,7 @@ C08236885 -8.83276 nan nan nan
 C40681069 -8.83161 nan nan nan
 C67134656 -8.83072 nan nan nan
 C64954058 -8.83064 nan nan nan
-355925_CHEMBL209522 -8.83033 nan nan nan
+CHEMBL209522 -8.83033 nan nan nan
 C34785637 -8.8302 nan nan nan
 C39361779 -8.83007 nan nan nan
 C44452972 -8.82951 nan nan nan
@@ -2665,7 +2665,7 @@ C08904191 -8.82652 nan nan nan
 C35383133 -8.82597 nan nan nan
 C66555362 -8.82572 nan nan nan
 C06483948 -8.8252 nan nan nan
-355891_CHEMBL386399 -8.8248 nan nan nan
+CHEMBL386399 -8.8248 nan nan nan
 C01326225 -8.82372 nan nan nan
 C00804040 -8.82316 nan nan nan
 C33910438 -8.82307 nan nan nan
@@ -2679,7 +2679,7 @@ C12690187 -8.81754 nan nan nan
 C52818665 -8.81667 nan nan nan
 C36812127 -8.81565 nan nan nan
 C15942350 -8.81512 nan nan nan
-518366_CHEMBL515048 -8.81486 nan nan nan
+CHEMBL515048 -8.81486 nan nan nan
 C01270792 -8.81361 nan nan nan
 C56384192 -8.81327 nan nan nan
 C63537904 -8.81162 nan nan nan
@@ -2772,7 +2772,7 @@ C20182760 -8.75861 nan nan nan
 C47497963 -8.75768 nan nan nan
 C34785246 -8.75699 nan nan nan
 C38547648 -8.75632 nan nan nan
-355597_CHEMBL379345 -8.75555 nan nan nan
+CHEMBL379345 -8.75555 nan nan nan
 C12744891 -8.75537 nan nan nan
 C54349345 -8.75506 nan nan nan
 C36492579 -8.75468 nan nan nan
@@ -2802,7 +2802,7 @@ C46567263 -8.7428 nan nan nan
 C11118421 -8.74214 nan nan nan
 C49469272 -8.74045 nan nan nan
 C35345646 -8.73996 nan nan nan
-518457_CHEMBL514748 -8.73968 nan nan nan
+CHEMBL514748 -8.73968 nan nan nan
 C16616226 -8.73929 nan nan nan
 C66273733 -8.73911 nan nan nan
 C08695960 -8.73787 nan nan nan
@@ -2831,7 +2831,7 @@ C11855629 -8.72142 nan nan nan
 C41753252 -8.71763 nan nan nan
 C14228873 -8.71762 nan nan nan
 C07987023 -8.7176 nan nan nan
-355628_CHEMBL438068 -8.71731 nan nan nan
+CHEMBL438068 -8.71731 nan nan nan
 C56826412 -8.71701 nan nan nan
 C28758201 -8.71638 nan nan nan
 C59937902 -8.71636 nan nan nan
@@ -2867,7 +2867,7 @@ C20691143 -8.70018 nan nan nan
 C39561129 -8.69992 nan nan nan
 C24090361 -8.69937 nan nan nan
 C65441683 -8.69864 nan nan nan
-355629_CHEMBL448474 -8.69723 nan nan nan
+CHEMBL448474 -8.69723 nan nan nan
 C26283179 -8.69672 nan nan nan
 C59293640 -8.69652 nan nan nan
 C62825832 -8.69628 nan nan nan
@@ -2990,9 +2990,9 @@ C43527552 -8.63037 nan nan nan
 C05013835 -8.62931 nan nan nan
 C02192307 -8.62885 nan nan nan
 C39729296 -8.62802 nan nan nan
-346200_CHEMBL207307 -8.6276 nan nan nan
+CHEMBL207307 -8.6276 nan nan nan
 C65963221 -8.62575 nan nan nan
-355596_CHEMBL438613 -8.62484 nan nan nan
+CHEMBL438613 -8.62484 nan nan nan
 C15443960 -8.62322 nan nan nan
 C32620005 -8.62168 nan nan nan
 C03598746 -8.62077 nan nan nan
@@ -3033,7 +3033,7 @@ C15009713 -8.59464 nan nan nan
 C05275726 -8.59447 nan nan nan
 C05808988 -8.59427 nan nan nan
 C62385318 -8.59329 nan nan nan
-355986_CHEMBL384763 -8.59323 nan nan nan
+CHEMBL384763 -8.59323 nan nan nan
 C40700652 -8.59179 nan nan nan
 C67269014 -8.59121 nan nan nan
 C39662768 -8.59078 nan nan nan
@@ -3048,7 +3048,7 @@ C00507580 -8.58669 nan nan nan
 C20341309 -8.58556 nan nan nan
 C14473988 -8.58495 nan nan nan
 C39682536 -8.58458 nan nan nan
-355666_CHEMBL212076 -8.58411 nan nan nan
+CHEMBL212076 -8.58411 nan nan nan
 C66556519 -8.58392 nan nan nan
 C33732153 -8.58228 nan nan nan
 C48262952 -8.57902 nan nan nan
@@ -3108,7 +3108,7 @@ C14160882 -8.53903 nan nan nan
 C05956655 -8.53852 nan nan nan
 C39358650 -8.53852 nan nan nan
 C44023306 -8.53849 nan nan nan
-335628_CHEMBL200102 -8.53827 nan nan nan
+CHEMBL200102 -8.53827 nan nan nan
 C10022166 -8.53761 nan nan nan
 C46915242 -8.53666 nan nan nan
 C00721765 -8.53605 nan nan nan
@@ -3120,10 +3120,10 @@ C23118789 -8.53259 nan nan nan
 C08001159 -8.5319 nan nan nan
 C66790390 -8.53035 nan nan nan
 C38644095 -8.52971 nan nan nan
-355827_CHEMBL386882 -8.5289 nan nan nan
+CHEMBL386882 -8.5289 nan nan nan
 C15205486 -8.52849 nan nan nan
 C04883374 -8.52808 nan nan nan
-355667_CHEMBL377631 -8.52793 nan nan nan
+CHEMBL377631 -8.52793 nan nan nan
 C65412563 -8.52698 nan nan nan
 C03225241 -8.52649 nan nan nan
 C21577386 -8.52636 nan nan nan
@@ -3163,7 +3163,7 @@ C21504281 -8.50883 nan nan nan
 C12551708 -8.50862 nan nan nan
 C27008476 -8.50809 nan nan nan
 C20318490 -8.508 nan nan nan
-355957_CHEMBL377024 -8.5079 nan nan nan
+CHEMBL377024 -8.5079 nan nan nan
 C37254567 -8.50751 nan nan nan
 C00182863 -8.5063 nan nan nan
 C20646414 -8.50612 nan nan nan
@@ -3178,7 +3178,7 @@ C37196941 -8.50202 nan nan nan
 C42139761 -8.50154 nan nan nan
 C21708446 -8.50138 nan nan nan
 C60375793 -8.50041 nan nan nan
-355955_CHEMBL379641 -8.50001 nan nan nan
+CHEMBL379641 -8.50001 nan nan nan
 C38739639 -8.49761 nan nan nan
 C42640223 -8.49747 nan nan nan
 C42427906 -8.49738 nan nan nan
@@ -3250,7 +3250,7 @@ C42510523 -8.44552 nan nan nan
 C26221867 -8.4449 nan nan nan
 C02519985 -8.44444 nan nan nan
 C01655009 -8.44397 nan nan nan
-183085_CHEMBL112953 -8.44211 nan nan nan
+CHEMBL112953 -8.44211 nan nan nan
 C18195849 -8.44099 nan nan nan
 C38740465 -8.43992 nan nan nan
 C45725603 -8.4392 nan nan nan
@@ -3269,7 +3269,7 @@ C02229120 -8.43247 nan nan nan
 C03842161 -8.43235 nan nan nan
 C36257375 -8.43181 nan nan nan
 C20682281 -8.43076 nan nan nan
-355987_CHEMBL215657 -8.43016 nan nan nan
+CHEMBL215657 -8.43016 nan nan nan
 C51626273 -8.42871 nan nan nan
 C39007760 -8.42788 nan nan nan
 C16524431 -8.42731 nan nan nan
@@ -3287,7 +3287,7 @@ C58929482 -8.42099 nan nan nan
 C00632591 -8.42079 nan nan nan
 C32858473 -8.42012 nan nan nan
 C54227198 -8.41979 nan nan nan
-517866_CHEMBL511439 -8.41963 nan nan nan
+CHEMBL511439 -8.41963 nan nan nan
 C12467486 -8.41843 nan nan nan
 C35346842 -8.41819 nan nan nan
 C47546886 -8.41789 nan nan nan
@@ -3308,7 +3308,7 @@ C36772002 -8.40513 nan nan nan
 C36161462 -8.40425 nan nan nan
 C02218704 -8.40358 nan nan nan
 C40781458 -8.40302 nan nan nan
-321074_CHEMBL365159 -8.40283 nan nan nan
+CHEMBL365159 -8.40283 nan nan nan
 C38547650 -8.39897 nan nan nan
 C20885161 -8.39885 nan nan nan
 C12250486 -8.3985 nan nan nan
@@ -3353,7 +3353,7 @@ C02786274 -8.3764 nan nan nan
 C39447414 -8.37563 nan nan nan
 C23426514 -8.37463 nan nan nan
 C45729297 -8.37403 nan nan nan
-355761_CHEMBL377045 -8.37361 nan nan nan
+CHEMBL377045 -8.37361 nan nan nan
 C55270761 -8.37265 nan nan nan
 C65920480 -8.37261 nan nan nan
 C17078146 -8.37247 nan nan nan
@@ -3410,7 +3410,7 @@ C13811292 -8.34049 nan nan nan
 C06137221 -8.34046 nan nan nan
 C63202092 -8.33937 nan nan nan
 C05464102 -8.33817 nan nan nan
-355669_CHEMBL215947 -8.33697 nan nan nan
+CHEMBL215947 -8.33697 nan nan nan
 C16778858 -8.33696 nan nan nan
 C22142763 -8.33652 nan nan nan
 C66579812 -8.33532 nan nan nan
@@ -3426,7 +3426,7 @@ C21023818 -8.33205 nan nan nan
 C13702123 -8.33109 nan nan nan
 C13941944 -8.33089 nan nan nan
 C49885727 -8.33036 nan nan nan
-355797_CHEMBL377958 -8.32984 nan nan nan
+CHEMBL377958 -8.32984 nan nan nan
 C05860957 -8.32977 nan nan nan
 C29356077 -8.32924 nan nan nan
 C49032624 -8.32802 nan nan nan
@@ -3437,7 +3437,7 @@ C45160831 -8.32452 nan nan nan
 C63428570 -8.32347 nan nan nan
 C06601894 -8.32266 nan nan nan
 C51278207 -8.32239 nan nan nan
-355726_CHEMBL386780 -8.32238 nan nan nan
+CHEMBL386780 -8.32238 nan nan nan
 C04545550 -8.32235 nan nan nan
 C04400787 -8.32176 nan nan nan
 C13639964 -8.32161 nan nan nan
@@ -3463,7 +3463,7 @@ C49795353 -8.30704 nan nan nan
 C55266100 -8.30697 nan nan nan
 C01867295 -8.30625 nan nan nan
 C10761276 -8.30586 nan nan nan
-355727_CHEMBL211528 -8.30563 nan nan nan
+CHEMBL211528 -8.30563 nan nan nan
 C32834947 -8.3046 nan nan nan
 C67618530 -8.30441 nan nan nan
 C64846808 -8.30324 nan nan nan
@@ -3527,7 +3527,7 @@ C40369046 -8.25661 nan nan nan
 C01805640 -8.25593 nan nan nan
 C45874154 -8.25426 nan nan nan
 C25336412 -8.25381 nan nan nan
-320723_CHEMBL193282 -8.25345 nan nan nan
+CHEMBL193282 -8.25345 nan nan nan
 C66907621 -8.25249 nan nan nan
 C04656285 -8.25201 nan nan nan
 C59416594 -8.25057 nan nan nan
@@ -3572,7 +3572,7 @@ C45884339 -8.2173 nan nan nan
 C06863745 -8.2172 nan nan nan
 C00759062 -8.21693 nan nan nan
 C51062706 -8.21621 nan nan nan
-355894_CHEMBL385927 -8.21585 nan nan nan
+CHEMBL385927 -8.21585 nan nan nan
 C22058294 -8.21112 nan nan nan
 C67456774 -8.20857 nan nan nan
 C03840737 -8.20805 nan nan nan
@@ -3581,7 +3581,7 @@ C22738240 -8.20567 nan nan nan
 C18049693 -8.20373 nan nan nan
 C14237897 -8.2037 nan nan nan
 C39660363 -8.20275 nan nan nan
-317139_CHEMBL190182 -8.20135 nan nan nan
+CHEMBL190182 -8.20135 nan nan nan
 C13636512 -8.20032 nan nan nan
 C21316042 -8.19954 nan nan nan
 C58864498 -8.1989 nan nan nan
@@ -3626,8 +3626,8 @@ C31600418 -8.16372 nan nan nan
 C15942128 -8.16305 nan nan nan
 C00690040 -8.16283 nan nan nan
 C23581329 -8.16147 nan nan nan
-495617_CHEMBL467399 -8.16097 nan nan nan
-321066_CHEMBL191786 -8.15706 nan nan nan
+CHEMBL467399 -8.16097 nan nan nan
+CHEMBL191786 -8.15706 nan nan nan
 C51148772 -8.15645 nan nan nan
 C04380520 -8.15643 nan nan nan
 C04030514 -8.15596 nan nan nan
@@ -3651,8 +3651,8 @@ C14461574 -8.14647 nan nan nan
 C09298226 -8.14276 nan nan nan
 C52595487 -8.14212 nan nan nan
 C31028561 -8.14154 nan nan nan
-317497_CHEMBL365617 -8.14145 nan nan nan
-301179_CHEMBL360563 -8.14114 nan nan nan
+CHEMBL365617 -8.14145 nan nan nan
+CHEMBL360563 -8.14114 nan nan nan
 C03851022 -8.13967 nan nan nan
 C10390741 -8.13856 nan nan nan
 C40648346 -8.13794 nan nan nan
@@ -3688,7 +3688,7 @@ C50208697 -8.11531 nan nan nan
 C33014179 -8.11105 nan nan nan
 C04215231 -8.10915 nan nan nan
 C62824447 -8.10912 nan nan nan
-355724_CHEMBL377371 -8.10582 nan nan nan
+CHEMBL377371 -8.10582 nan nan nan
 C22419138 -8.10485 nan nan nan
 C05158312 -8.10447 nan nan nan
 C04851264 -8.10199 nan nan nan
@@ -3812,7 +3812,7 @@ C39352048 -7.98626 nan nan nan
 C39659853 -7.98365 nan nan nan
 C11024168 -7.98168 nan nan nan
 C08995717 -7.98106 nan nan nan
-320889_CHEMBL191241 -7.98 nan nan nan
+CHEMBL191241 -7.98 nan nan nan
 C39695772 -7.97993 nan nan nan
 C20882599 -7.97918 nan nan nan
 C00756502 -7.97795 nan nan nan
@@ -3821,7 +3821,7 @@ C39252968 -7.97716 nan nan nan
 C16361075 -7.97642 nan nan nan
 C15081122 -7.97641 nan nan nan
 C54397484 -7.97508 nan nan nan
-317776_CHEMBL365700 -7.97506 nan nan nan
+CHEMBL365700 -7.97506 nan nan nan
 C67401472 -7.97451 nan nan nan
 C03184169 -7.97424 nan nan nan
 C39920255 -7.97365 nan nan nan
@@ -3898,7 +3898,7 @@ C37742623 -7.91625 nan nan nan
 C40161091 -7.91596 nan nan nan
 C15424337 -7.91542 nan nan nan
 C47337786 -7.91532 nan nan nan
-320743_CHEMBL191268 -7.91455 nan nan nan
+CHEMBL191268 -7.91455 nan nan nan
 C40290948 -7.91451 nan nan nan
 C08726020 -7.91447 nan nan nan
 C42118842 -7.91262 nan nan nan
@@ -3908,7 +3908,7 @@ C17316837 -7.90838 nan nan nan
 C12312465 -7.90724 nan nan nan
 C04631772 -7.9065 nan nan nan
 C12545281 -7.90586 nan nan nan
-320908_CHEMBL273986 -7.90477 nan nan nan
+CHEMBL273986 -7.90477 nan nan nan
 C01617185 -7.90451 nan nan nan
 C08436054 -7.90275 nan nan nan
 C40688670 -7.90245 nan nan nan
@@ -3931,14 +3931,14 @@ C04992457 -7.89259 nan nan nan
 C39331152 -7.88338 nan nan nan
 C53620167 -7.88204 nan nan nan
 C24833729 -7.88111 nan nan nan
-321250_CHEMBL192062 -7.88022 nan nan nan
+CHEMBL192062 -7.88022 nan nan nan
 C53113365 -7.87924 nan nan nan
 C04470949 -7.87915 nan nan nan
 C25585424 -7.87707 nan nan nan
 C44861355 -7.87548 nan nan nan
 C60341423 -7.87338 nan nan nan
-320879_CHEMBL192647 -7.87231 nan nan nan
-321070_CHEMBL191635 -7.87045 nan nan nan
+CHEMBL192647 -7.87231 nan nan nan
+CHEMBL191635 -7.87045 nan nan nan
 C05497014 -7.87037 nan nan nan
 C22510168 -7.8698 nan nan nan
 C36640511 -7.86676 nan nan nan
@@ -3960,7 +3960,7 @@ C44144148 -7.85153 nan nan nan
 C38699914 -7.84932 nan nan nan
 C08856061 -7.8491 nan nan nan
 C52004953 -7.8489 nan nan nan
-321251_CHEMBL192145 -7.84507 nan nan nan
+CHEMBL192145 -7.84507 nan nan nan
 C09639693 -7.84502 nan nan nan
 C66956473 -7.84453 nan nan nan
 C08921641 -7.84368 nan nan nan
@@ -4252,7 +4252,7 @@ C24351272 -7.44797 nan nan nan
 C12716020 -7.44763 nan nan nan
 C05078407 -7.44693 nan nan nan
 C39326869 -7.4469 nan nan nan
-355798_CHEMBL212850 -7.44244 nan nan nan
+CHEMBL212850 -7.44244 nan nan nan
 C44830397 -7.44223 nan nan nan
 C40376634 -7.44216 nan nan nan
 C43157014 -7.44138 nan nan nan
@@ -4285,7 +4285,7 @@ C41790279 -7.39644 nan nan nan
 C41040553 -7.39591 nan nan nan
 C06856692 -7.39119 nan nan nan
 C40975766 -7.38981 nan nan nan
-355762_CHEMBL212133 -7.38794 nan nan nan
+CHEMBL212133 -7.38794 nan nan nan
 C16007200 -7.38788 nan nan nan
 C39667621 -7.38699 nan nan nan
 C52306743 -7.38391 nan nan nan
@@ -4757,7 +4757,7 @@ C31522796 -5.07503 nan nan nan
 C09504962 -5.05778 nan nan nan
 C14479136 -5.03171 nan nan nan
 C48350739 -5.02592 nan nan nan
-517639_CHEMBL512489 -5.01293 nan nan nan
+CHEMBL512489 -5.01293 nan nan nan
 C03011829 -5.01144 nan nan nan
 C39662569 -5.00963 nan nan nan
 C43741419 -4.98528 nan nan nan
@@ -4766,11 +4766,11 @@ C14282139 -4.96799 nan nan nan
 C46818618 -4.96711 nan nan nan
 C02790970 -4.9594 nan nan nan
 C44172617 -4.95199 nan nan nan
-517638_CHEMBL469932 -4.89945 nan nan nan
+CHEMBL469932 -4.89945 nan nan nan
 C39201165 -4.89468 nan nan nan
 C09111189 -4.87951 nan nan nan
 C00668475 -4.86676 nan nan nan
-517636_CHEMBL511618 -4.82057 nan nan nan
+CHEMBL511618 -4.82057 nan nan nan
 C49181652 -4.82011 nan nan nan
 C21969365 -4.803 nan nan nan
 C08826316 -4.79392 nan nan nan
@@ -4809,13 +4809,13 @@ C14996258 -4.35836 nan nan nan
 C07011330 -4.31632 nan nan nan
 C09298378 -4.30591 nan nan nan
 C04222085 -4.20019 nan nan nan
-356027_CHEMBL378352 -4.19315 nan nan nan
+CHEMBL378352 -4.19315 nan nan nan
 C35456366 -4.12153 nan nan nan
 C35315268 -4.0806 nan nan nan
 C20502133 -4.07212 nan nan nan
 C65786991 -4.06711 nan nan nan
 C28708408 -4.02117 nan nan nan
-296303_CHEMBL368483 -3.99971 nan nan nan
+CHEMBL368483 -3.99971 nan nan nan
 C04210301 -3.95995 nan nan nan
 C35718096 -3.908 nan nan nan
 C12843542 -3.90348 nan nan nan
@@ -4831,7 +4831,7 @@ C09937241 -3.69786 nan nan nan
 C12998271 -3.62071 nan nan nan
 C16490109 -3.60547 nan nan nan
 C22021182 -3.57633 nan nan nan
-206555_CHEMBL339231 -3.45357 nan nan nan
+CHEMBL339231 -3.45357 nan nan nan
 C14994079 -3.44423 nan nan nan
 C04222088 -3.43642 nan nan nan
 C21225257 -3.42536 nan nan nan
@@ -4841,7 +4841,7 @@ C21649841 -3.32211 nan nan nan
 C12402257 -3.26531 nan nan nan
 C10098284 -3.2527 nan nan nan
 C43760900 -3.24066 nan nan nan
-206917_CHEMBL421647 -3.2234 nan nan nan
+CHEMBL421647 -3.2234 nan nan nan
 C15466038 -3.2228 nan nan nan
 C13915277 -3.1117 nan nan nan
 C13359666 -3.09248 nan nan nan
@@ -4851,14 +4851,14 @@ C64871180 -2.99191 nan nan nan
 C21634909 -2.96764 nan nan nan
 C12462559 -2.95349 nan nan nan
 C24007262 -2.93347 nan nan nan
-353745_CHEMBL209356 -2.90305 nan nan nan
+CHEMBL209356 -2.90305 nan nan nan
 C22487237 -2.81782 nan nan nan
 C35417532 -2.81734 nan nan nan
-353628_CHEMBL377559 -2.80504 nan nan nan
+CHEMBL377559 -2.80504 nan nan nan
 C13645204 -2.80023 nan nan nan
 C13359644 -2.72917 nan nan nan
 C20885506 -2.69602 nan nan nan
-183934_CHEMBL109480 -2.6929 nan nan nan
+CHEMBL109480 -2.6929 nan nan nan
 C19321224 -2.56481 nan nan nan
 C20885504 -2.43668 nan nan nan
 C36221127 -2.4202 nan nan nan
@@ -4879,9 +4879,9 @@ C40804646 -1.13207 nan nan nan
 C25183639 -1.07994 nan nan nan
 C08617316 -1.04941 nan nan nan
 C34367800 -0.91327 nan nan nan
-353315_CHEMBL377782 -0.78204 nan nan nan
+CHEMBL377782 -0.78204 nan nan nan
 C33260608 -0.70778 nan nan nan
-25906_CHEMBL278315 -0.49477 nan nan nan
+CHEMBL278315 -0.49477 nan nan nan
 C04222115 -0.42606 nan nan nan
 C08214734 -0.29082 nan nan nan
 C39560160 -0.17776 nan nan nan
@@ -4903,7 +4903,7 @@ C04177791 1.805 nan nan nan
 C13396043 1.8262 nan nan nan
 C08920976 1.90983 nan nan nan
 C64870157 2.11544 nan nan nan
-212940_CHEMBL338987 2.1966 nan nan nan
+CHEMBL338987 2.1966 nan nan nan
 C08143857 2.59627 nan nan nan
 C38814891 2.80966 nan nan nan
 C40825874 2.8677 nan nan nan

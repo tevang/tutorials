@@ -4,8 +4,26 @@
 library("ROCR")
 library("hash")
 
+
+## ---- find the molnames that are common in all score files in order to compare the scoring functions correctly
+common_molnames <- function(RESULTS_FILES) {
+  x = read.table(RESULTS_FILES[1], header = TRUE)
+  colnames(x)[1] = "molname"
+  valid_molnames <- unique(sort(x$molname)) ; # unique molnames
+  for (i in 2:length(RESULTS_FILES)) {
+    x = read.table(RESULTS_FILES[i], header = TRUE)
+    colnames(x)[1] = "molname"
+    valid_molnames <- intersect(valid_molnames, x$molname)
+  }
+  return(valid_molnames)
+}
+
 ## ---- read_scores
-read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
+read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE, valid_molnames) {
+"
+  The valid_molnames list ensures that only the molnames that were scored by all scoring functions will
+  be considered.
+"
   x = read.table(RESULTS_FILE, header = TRUE)
   colnames(x)[2] = "score"
   # ignore the other columns
@@ -17,10 +35,10 @@ read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE) {
   colnames(a)[2] = "label"
   label_dict = hash()
   for (i in seq(1, nrow(a))) { label_dict[a[i,1]] <- a[i,2] }
-  scores <- rep(0, nrow(x))
-  labels <- rep("", nrow(x))
+  scores <- rep(0, length(valid_molnames))
+  labels <- rep("", length(valid_molnames))  ; # initialize labels to a list of size(scores) but without contents
   i = 1
-  for (molname in names(score_dict)) {
+  for (molname in valid_molnames) {
     scores[i] <- score_dict[[molname]]
     labels[i] <- label_dict[[molname]]
     i <- i+1

@@ -18,17 +18,16 @@ RESULTS_FILES = c("data/SF1.scores",
                   "data/SF4.scores",
                   "data/SF5.scores"
 )
+
+
+valid_molnames <- common_molnames(RESULTS_FILES)  ; # molnames with scores by all scoring functions
+
 ```
 
-Paste below all files with molecular bioactivities. First column must be the molname and the second its bioactivity (1 or 0).
+Paste below the file with molecular bioactivities of all molecules. First column must be the molname and the second its bioactivity (1 or 0).
 
 ```{r activities}
-ACTIVITIES_FILES = c("data/SF1.activities",
-                     "data/SF2.activities",
-                     "data/SF3.activities",
-                     "data/SF4.activities",
-                     "data/SF5.activities"
-)
+ACTIVITIES_FILE = "data/activities"
 ```
 
 Write the names that will be shown in the legend.
@@ -61,18 +60,16 @@ COLORS <- rainbow(3*length(RESULTS_FILES))
 COLORS <- COLORS[seq(3, length(COLORS), 3)]
 
 for (i in 1:length(RESULTS_FILES)) {
-  pred = read_scores(RESULTS_FILES[i], ACTIVITIES_FILES[i])
+  pred = read_scores(RESULTS_FILES[i], ACTIVITIES_FILE, valid_molnames)
   perf = performance(pred, 'tpr', 'fpr')
   if (i==1) { plot(perf, add = FALSE, colorize = FALSE, lwd=3, col=COLORS[i], main="ROC Curves") }
   else { plot(perf, add = TRUE, colorize = FALSE, lwd=3, col=COLORS[i]) }
-  # plot(perf2, add = TRUE, colorize = TRUE, lwd=3)
-  # plot(perf3, add = TRUE, colorize = TRUE, lwd=3)
 }
 
 AUCs = rep(0, length(RESULTS_FILES))
 LNAMES = rep(0, length(RESULTS_FILES))
 for (i in 1:length(RESULTS_FILES)) {
-  pred = read_scores(RESULTS_FILES[i], ACTIVITIES_FILES[i])
+  pred = read_scores(RESULTS_FILES[i], ACTIVITIES_FILE, valid_molnames)
   auc = performance(pred, measure='auc')
   AUCs[i] = sprintf("%.3f", auc@y.values)
   LNAMES[i] = paste(NAMES[i], "(", AUCs[i],")")
