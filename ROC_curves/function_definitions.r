@@ -5,8 +5,12 @@ library("ROCR")
 library("hash")
 
 
-## ---- find the molnames that are common in all score files in order to compare the scoring functions correctly
+## ---- common_molnames
 common_molnames <- function(RESULTS_FILES) {
+  "
+  A function to find the molnames that are common in all score files in order to compare the scoring 
+  functions properly.
+  "
   x = read.table(RESULTS_FILES[1], header = TRUE)
   colnames(x)[1] = "molname"
   valid_molnames <- unique(sort(x$molname)) ; # unique molnames
