@@ -403,10 +403,12 @@ to resuse custom functions in other chuncks. The first chunk reads in fun.R usin
   &quot;
   x = read.table(RESULTS_FILES[1], header = TRUE)
   colnames(x)[1] = &quot;molname&quot;  ; # add a column header and operate on x$molname, otherwise 'inersect' fails!
+  x$molname &lt;- tolower(x$molname)
   valid_molnames &lt;- unique(sort(x$molname)) ; # unique molnames
   for (i in 2:length(RESULTS_FILES)) {
     x = read.table(RESULTS_FILES[i], header = TRUE)
     colnames(x)[1] = &quot;molname&quot;
+    x$molname &lt;- tolower(x$molname)
     valid_molnames &lt;- intersect(valid_molnames, x$molname)
   }
   return(valid_molnames)
@@ -415,6 +417,7 @@ to resuse custom functions in other chuncks. The first chunk reads in fun.R usin
   a = read.table(ACTIVITIES_FILE)
   colnames(a)[1] = &quot;molname&quot;
   colnames(a)[2] = &quot;label&quot;
+  a$molname &lt;- tolower(a$molname)
   actives &lt;- a$molname[a$label==1]
   inactives &lt;- a$molname[a$label==0]
   active_num &lt;- length(actives[actives %in% valid_molnames])
@@ -430,7 +433,9 @@ to resuse custom functions in other chuncks. The first chunk reads in fun.R usin
   be considered.
 &quot;
   x = read.table(RESULTS_FILE, header = TRUE)
+  colnames(x)[1] = &quot;molname&quot;
   colnames(x)[2] = &quot;score&quot;
+  x$molname &lt;- tolower(x$molname)
   # ignore the other columns
   score_dict = hash()
   for (i in seq(1, nrow(x))) { score_dict[x[i,1]] &lt;- x[i,2] }
@@ -438,6 +443,7 @@ to resuse custom functions in other chuncks. The first chunk reads in fun.R usin
   a = read.table(ACTIVITIES_FILE)
   colnames(a)[1] = &quot;molname&quot;
   colnames(a)[2] = &quot;label&quot;
+  a$molname &lt;- tolower(a$molname)
   label_dict = hash()
   for (i in seq(1, nrow(a))) { label_dict[a[i,1]] &lt;- a[i,2] }
   scores &lt;- rep(0, length(valid_molnames))

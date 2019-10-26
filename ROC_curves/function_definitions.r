@@ -13,10 +13,12 @@ common_molnames <- function(RESULTS_FILES) {
   "
   x = read.table(RESULTS_FILES[1], header = TRUE)
   colnames(x)[1] = "molname"  ; # add a column header and operate on x$molname, otherwise 'inersect' fails!
+  x$molname <- tolower(x$molname)
   valid_molnames <- unique(sort(x$molname)) ; # unique molnames
   for (i in 2:length(RESULTS_FILES)) {
     x = read.table(RESULTS_FILES[i], header = TRUE)
     colnames(x)[1] = "molname"
+    x$molname <- tolower(x$molname)
     valid_molnames <- intersect(valid_molnames, x$molname)
   }
   return(valid_molnames)
@@ -27,6 +29,7 @@ count_actives_inactives <- function(ACTIVITIES_FILE, valid_molnames) {
   a = read.table(ACTIVITIES_FILE)
   colnames(a)[1] = "molname"
   colnames(a)[2] = "label"
+  a$molname <- tolower(a$molname)
   actives <- a$molname[a$label==1]
   inactives <- a$molname[a$label==0]
   active_num <- length(actives[actives %in% valid_molnames])
@@ -44,7 +47,9 @@ read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE, valid_molnames) {
   be considered.
 "
   x = read.table(RESULTS_FILE, header = TRUE)
+  colnames(x)[1] = "molname"
   colnames(x)[2] = "score"
+  x$molname <- tolower(x$molname)
   # ignore the other columns
   score_dict = hash()
   for (i in seq(1, nrow(x))) { score_dict[x[i,1]] <- x[i,2] }
@@ -52,6 +57,7 @@ read_scores <- function(RESULTS_FILE, ACTIVITIES_FILE, valid_molnames) {
   a = read.table(ACTIVITIES_FILE)
   colnames(a)[1] = "molname"
   colnames(a)[2] = "label"
+  a$molname <- tolower(a$molname)
   label_dict = hash()
   for (i in seq(1, nrow(a))) { label_dict[a[i,1]] <- a[i,2] }
   scores <- rep(0, length(valid_molnames))
