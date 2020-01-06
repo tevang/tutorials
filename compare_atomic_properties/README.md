@@ -112,7 +112,9 @@ img.save("pose2.png")
 
 Conformer 1                |  Conformer 2
 :-------------------------:|:-------------------------:
-![](pose1.png)             |  ![](pose2.png)
+![](pose1.png)             |  ![](pose2.marked.png)
+
+The red arrow on conformer 2 show where the differences are locate. Mainly at the aromatic carbons and less at the polarized oxygen of the methyl phenyl ether.
 
 #### 4. Now lets visualize the average (unweighted) partial charges of each atom.
 
