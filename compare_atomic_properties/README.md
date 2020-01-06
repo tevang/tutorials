@@ -6,11 +6,11 @@ and the partial charges were calculated individually for each pose on the PM6 se
 geometry optimization.
 
 
-####1. Set global variables
+#### 1. Set global variables
 ```python
-mol2_file = "data/LEM00011480_stereo1_ion1_tau1.COSMO_PM6.mol2"   # multi-molecule MOL2 file with PM6 partial charges
+mol2_file = "data/compound_stereo1_ion1_tau1.COSMO_PM6.mol2"   # multi-molecule MOL2 file with PM6 partial charges
 ```
-####2. Define the necessary functions.
+#### 2. Define the necessary functions.
 
 ```python
 import os
@@ -81,7 +81,7 @@ mol_list = load_sdf_with_charges(sdf_file)
 
 ```
 
-####3 First we will compare the partial charges of two distinct conformers.
+#### 3. First we will compare the partial charges of two distinct conformers.
 
 First conformer:
 
@@ -114,7 +114,7 @@ img.save("pose2.png")
 ![EP at the binding pocket of BACE.](pose2.png)
 
 
-####4 Now lets visualize the average (unweighted) partial charges of each atom.
+#### 4. Now lets visualize the average (unweighted) partial charges of each atom.
 
 ```python
 all_pose_charges = []
@@ -134,7 +134,7 @@ img.save("mean_pose.png")
 ![EP at the binding pocket of BACE.](mean_pose.png)
 
 
-####5 Finally we can see in which atoms are located most of the differences in the partial charge value by plotting the standard deviations.
+#### 5. Finally we can see in which atoms are located most of the differences in the partial charge value by plotting the standard deviations.
 
 ```python
 d = Draw.MolDraw2DCairo(400, 400)
