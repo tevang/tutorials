@@ -96,9 +96,6 @@ img = show_png(d.GetDrawingText())
 img.save("pose1.png", quality=95)
 ```
 
-![EP at the binding pocket of BACE.](pose1.png)
-
-
 Second conformer:
 
 ```python
@@ -113,8 +110,9 @@ img = show_png(d.GetDrawingText())
 img.save("pose2.png")
 ```
 
-![EP at the binding pocket of BACE.](pose2.png)
-
+Conformer 1                |  Conformer 2
+:-------------------------:|:-------------------------:
+![](pose1.png)             |  ![](pose2.png)
 
 #### 4. Now lets visualize the average (unweighted) partial charges of each atom.
 
@@ -133,7 +131,7 @@ img = show_png(d.GetDrawingText())
 img.save("mean_pose.png")
 ```
 
-![EP at the binding pocket of BACE.](mean_pose.png)
+![](mean_pose.png)
 
 
 #### 5. Finally we can see in which atoms are located most of the differences in the partial charge value by plotting the standard deviations.
@@ -146,4 +144,4 @@ img = show_png(d.GetDrawingText())
 img.save("std_pose.png")
 ```
 
-![EP at the binding pocket of BACE.](std_pose.png)
+![](std_pose.png)
