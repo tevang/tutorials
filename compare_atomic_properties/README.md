@@ -96,6 +96,9 @@ img = show_png(d.GetDrawingText())
 img.save("pose1.png", quality=95)
 ```
 
+![EP at the binding pocket of BACE.](pose1.png)
+
+
 Second conformer:
 
 ```python
@@ -109,9 +112,6 @@ d.FinishDrawing()
 img = show_png(d.GetDrawingText())
 img.save("pose2.png")
 ```
-
-![EP at the binding pocket of BACE.](pose1.png)
-
 
 ![EP at the binding pocket of BACE.](pose2.png)
 
