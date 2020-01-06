@@ -82,6 +82,8 @@ mol_list = load_sdf_with_charges(sdf_file)
 ```
 
 #### 3. First we will compare the partial charges of two distinct conformers.
+I will pick up two docking poses with noticeable differences in charge distribution.
+
 
 First conformer:
 
@@ -114,7 +116,7 @@ Conformer 1                |  Conformer 2
 :-------------------------:|:-------------------------:
 ![](pose1.png)             |  ![](pose2.marked.png)
 
-The red arrow on conformer 2 show where the differences are locate. Mainly at the aromatic carbons and less at the polarized oxygen of the methyl phenyl ether.
+The red arrows on conformer 2 show where the differences are locate. Mainly at the aromatic carbons and less at the polarized oxygen of the methyl phenyl ether.
 
 #### 4. Now lets visualize the average (unweighted) partial charges of each atom.
 
