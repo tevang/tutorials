@@ -142,7 +142,7 @@ img.save("mean_pose.png")
 
 ```python
 d = Draw.MolDraw2DCairo(400, 400)
-SimilarityMaps.GetSimilarityMapFromWeights(mol1,list(-1*std_pose_charges),draw2d=d)
+SimilarityMaps.GetSimilarityMapFromWeights(mol1,list(std_pose_charges),draw2d=d)
 d.FinishDrawing()
 img = show_png(d.GetDrawingText())
 img.save("std_pose.png")
