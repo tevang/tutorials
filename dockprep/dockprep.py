@@ -32,7 +32,7 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
     """)
     parser.add_argument("-complex", dest="COMPLEX", required=False, default=None, type=str,
                         help="pdb file with the holo form of the receptor.")
-    parser.add_argument("-cmethod", dest="CHARGE_METHOD", required=False, default='gas', type=str, choices=['gas', 'am1'],
+    parser.add_argument("--charge-method", dest="CHARGE_METHOD", required=False, default='gas', type=str, choices=['gas', 'am1'],
                         help="Method to calculate charges fo the ligand. Default: %(default)s")
     parser.add_argument("-neut", dest="NEUTRALIZE", required=False, default=False, action='store_true',
                         help="Neutralize the system by adding counter ions.")

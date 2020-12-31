@@ -12,7 +12,7 @@ conda activate pychimera
 pip install pychimera
 pip install --upgrade numpy			# upgrade numpy to match the version that pychimera needs
 ```
-Finally add the path to `protonate_receptor.py` to your `PATH` variable and create a symbolic link, like `sudo ln -s [full path to protonate_receptor.py] /usr/local/bin/`. 
+Finally, add the path to `protonate_receptor.py` to your `PATH` variable and create a symbolic link, like `sudo ln -s [full path to protonate_receptor.py] /usr/local/bin/`. 
 
 ## TUTORIAL
 
