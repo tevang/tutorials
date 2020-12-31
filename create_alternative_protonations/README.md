@@ -6,11 +6,11 @@ The script must be executed with [PyChimera](https://pychimera.readthedocs.io/en
 
 ## INSTALLATION
 ```
-conda create -n ete3 -c insilichem pychimera	# this will create a virtual environment for PyChimera and modify your ~/.bashrc thus you have to source it again
+conda create -n pychimera -c insilichem pychimera	# this will create a virtual environment for PyChimera and modify your ~/.bashrc thus you have to source it again
 source ~/.bashrc
-conda activate ete3
-pip install ete3
-pip install --upgrade numpy			# upgrade numpy to match the version that ete3 needs
+conda activate pychimera
+pip install pychimera
+pip install --upgrade numpy			# upgrade numpy to match the version that pychimera needs
 ```
 Finally add the path to `protonate_receptor.py` to your `PATH` variable and create a symbolic link, like `sudo ln -s [full path to protonate_receptor.py] /usr/local/bin/`. 
 
@@ -20,7 +20,7 @@ Download the pdb structure of HIV-1 protease complexed with a tripeptide inhibit
 
 ```
 source ~/.bashrc	# necessary only if you haven't sourced the lated modified version
-conda activate ete3
+conda activate pychimera
 pychimera $(which protonate_receptor.py) -rec 1a30_protein.pdb -lig 1a30_ligand.sdf -r 4.0 -list
 ```
 
@@ -41,5 +41,5 @@ The doubly protonated catalytic dyad does not exist. In general, the acid driven
 activate the water molecule for the nucleophilic attack, while the second member needs to be protonated in order to enhance the electrophilic nature of the substrate 
 carbonyl group.
 
-To deactivate the `ete3` conda virtual environment and switch to your default:
-`source deactivate ete3`
+To deactivate the `pychimera` conda virtual environment and switch to your default:
+`source deactivate pychimera`
