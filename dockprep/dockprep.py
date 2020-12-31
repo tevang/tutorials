@@ -9,7 +9,7 @@ import os, sys, traceback
 import random
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from collections import defaultdict
-
+from operator import itemgetter
 
 
 def cmdlineparse():
@@ -48,6 +48,8 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
     parser.add_argument("-lig", dest="LIGAND", required=False, default=None, type=str,
                         help="Instead of -complex give an sdf or mol2 file with optimized ligand structure from which to find the "
                              "binding site residues.")
+    parser.add_argument("-o", dest="OUT_PDB", required=False, default=None, type=str,
+                        help="Output PDB file name of the prepared protein-ligand complex.")
     parser.add_argument("-lignetcharge", dest="LIG_NET_CHARGE", required=False, default=None, type=int,
                         help="Optionaly (but RECOMMENDED) give the net charge of the ligand, otherwise it will be estimated by Chimera.")
     args = parser.parse_args()
@@ -56,22 +58,34 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
 
 ################################################### FUNCTION DEFINITIONS #########################################
 
-def strip_hydrogens_from_terminal_protein_residues():
+def standardize_terminal_protein_residues(receptor_pdb, molID="#0"):
     """
-    To avoid errors like 'ValueError: Cannot determine GAFF type for :11.A@HD14 (etc.)' raised by
-    initiateAddions(), originating from termini capped by Shrodinger's PrepWizard or incomplete or missing protein
-    residues, strip all hydrogens from protein's termini (applies to every protein chain).
+    To prevent errors like 'ValueError: Cannot determine GAFF type for :11.A@HD14 (etc.)' raised by
+    initiateAddions(), originating from termini capped by Shrodinger's Maestro or incomplete or missing protein
+    residues, mutate the terminal residues to their original aa type (applies to every protein chain).
     """
-    rc("sel protein")
+    print("Standardizing protein's terminal residues.")
+    rc("sel %s & protein" % molID)
     chaindID_resids = defaultdict(list)
     for r in currentResidues():
-        chaindID_resids[r.id.chainId].append(r.id.position)
-    sel_string = ":"
+        chaindID_resids[r.id.chainId].append((r.id.position, r.type))
     for chainID in chaindID_resids.keys():
-        chaindID_resids[chainID].sort()
-        sel_string += "%i.%s," % (chaindID_resids[chainID][0], str(chainID))     # N-term
-        sel_string += "%i.%s," % (chaindID_resids[chainID][-1], str(chainID))   # C-term
-    rc("delete element.H & " + sel_string[:-1])
+        chaindID_resids[chainID].sort(key=itemgetter(0))
+        # NOTE: the side-chain mutations (swapaa) were not necessary in the proteins tested so far.
+        # rc("swapaa %s %s:%i.%s" %
+        #    (chaindID_resids[chainID][0][1], molID, chaindID_resids[chainID][0][0], str(chainID)))     # N-term
+        rc("del element.H & %s:%i.%s" %
+           (molID, chaindID_resids[chainID][0][0], str(chainID)))
+        # rc("swapaa %s %s:%i.%s" %
+        #    (chaindID_resids[chainID][-1][1], molID, chaindID_resids[chainID][-1][0], str(chainID)))     # C-term
+        rc("del element.H & %s:%i.%s" %
+           (molID, chaindID_resids[chainID][-1][0], str(chainID)))
+    # Only if you write and load the PDB then Chimera will reset the valence of the N-terminal amide and
+    # thus will not again the H1,H2,H3 which cause the error.
+    rc("write format pdb #0 " + receptor_pdb.replace(".pdb", "_tmp.pdb"))
+    rc("del #0")
+    rc("open %s %s" % (molID, receptor_pdb.replace(".pdb", "_tmp.pdb")))
+    os.remove(receptor_pdb.replace(".pdb", "_tmp.pdb"))
 
 ##################################################################################################################
 
@@ -92,8 +106,7 @@ if __name__ == "__main__":
             rc("open %s" % args.COMPLEX)  # load the protein-ligand complex
             if args.KEEP_PROTEIN_HYDROGENS:
                 rc("delete element.H")
-            else:
-                strip_hydrogens_from_terminal_protein_residues()    # TODO: UNTESTED
+            standardize_terminal_protein_residues("#0")  # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
             rc("split #0 ligands")
@@ -116,8 +129,7 @@ if __name__ == "__main__":
             rc("open %s" % args.RECEPTOR)  # load the receptor
             if args.KEEP_PROTEIN_HYDROGENS:
                 rc("delete element.H")
-            else:
-                strip_hydrogens_from_terminal_protein_residues()    # read function's definition to understand why is here
+            standardize_terminal_protein_residues("#0")  # read function's definition to understand why is here
             rc("open %s" % args.LIGAND)  # load the ligand
             if args.STRIP_IONS:
                 rc("delete ions")
@@ -137,8 +149,7 @@ if __name__ == "__main__":
             rc("open %s" % args.RECEPTOR)  # load the receptor
             if args.KEEP_PROTEIN_HYDROGENS:
                 rc("delete element.H")
-            else:
-                strip_hydrogens_from_terminal_protein_residues()
+            standardize_terminal_protein_residues("#0")  # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
             # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
@@ -194,6 +205,8 @@ if __name__ == "__main__":
         # Finally, write the complex pdb file with headers
         if args.KEEP_CHAINIDS == False:
             rc("changechains B A all")  # <== OPTIONAL (ligand and protein will be chain A for homology modeling)
+        if args.OUT_PDB:
+            pdb = args.OUT_PDB
         if args.COMPLEX or args.LIGAND:
             rc("write format pdb #3 %s" % pdb)
         else:
