@@ -8,9 +8,10 @@ __email__="tevang3@gmail.com"
 import os, sys, traceback
 import random
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from collections import defaultdict
 
 
-## Parse command line arguments
+
 def cmdlineparse():
     parser = ArgumentParser(formatter_class=RawDescriptionHelpFormatter, description="""
 DESCRIPTION:
@@ -40,6 +41,8 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
                         help="Strip out all ions.")
     parser.add_argument("-keepchains", dest="KEEP_CHAINIDS", required=False, default=False, action='store_true',
                         help="Keep the original chain IDs. Default is False, ligand and protein will be chain A for homology modeling.")
+    parser.add_argument("-keephydrogens", dest="KEEP_PROTEIN_HYDROGENS", required=False, default=False, action='store_true',
+                        help="Keep the protein's hydrogens (default is to strip them).")
     parser.add_argument("-rec", dest="RECEPTOR", required=False, default=None, type=str,
                         help="Instead of -complex give the pdb file with the apo form of the receptor.")
     parser.add_argument("-lig", dest="LIGAND", required=False, default=None, type=str,
@@ -50,6 +53,27 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
     args = parser.parse_args()
     return args
 
+
+################################################### FUNCTION DEFINITIONS #########################################
+
+def strip_hydrogens_from_terminal_protein_residues():
+    """
+    To avoid errors like 'ValueError: Cannot determine GAFF type for :11.A@HD14 (etc.)' raised by
+    initiateAddions(), originating from termini capped by Shrodinger's PrepWizard or incomplete or missing protein
+    residues, strip all hydrogens from protein's termini (applies to every protein chain).
+    """
+    rc("sel protein")
+    chaindID_resids = defaultdict(list)
+    for r in currentResidues():
+        chaindID_resids[r.id.chainId].append(r.id.position)
+    sel_string = ":"
+    for chainID in chaindID_resids.keys():
+        chaindID_resids[chainID].sort()
+        sel_string += "%i.%s," % (chaindID_resids[chainID][0], str(chainID))     # N-term
+        sel_string += "%i.%s," % (chaindID_resids[chainID][-1], str(chainID))   # C-term
+    rc("delete element.H & " + sel_string[:-1])
+
+##################################################################################################################
 
 if __name__ == "__main__":
 
@@ -66,6 +90,10 @@ if __name__ == "__main__":
 
         if args.COMPLEX:
             rc("open %s" % args.COMPLEX)  # load the protein-ligand complex
+            if args.KEEP_PROTEIN_HYDROGENS:
+                rc("delete element.H")
+            else:
+                strip_hydrogens_from_terminal_protein_residues()    # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
             rc("split #0 ligands")
@@ -86,6 +114,10 @@ if __name__ == "__main__":
             pdb = args.COMPLEX.replace(".pdb", "_prep.pdb")
         elif args.RECEPTOR and args.LIGAND:
             rc("open %s" % args.RECEPTOR)  # load the receptor
+            if args.KEEP_PROTEIN_HYDROGENS:
+                rc("delete element.H")
+            else:
+                strip_hydrogens_from_terminal_protein_residues()    # read function's definition to understand why is here
             rc("open %s" % args.LIGAND)  # load the ligand
             if args.STRIP_IONS:
                 rc("delete ions")
@@ -103,6 +135,10 @@ if __name__ == "__main__":
             pdb = os.path.splitext(os.path.basename(args.RECEPTOR))[0] + "_" + os.path.splitext(os.path.basename(args.LIGAND))[0] + "_prep.pdb"
         elif args.RECEPTOR:
             rc("open %s" % args.RECEPTOR)  # load the receptor
+            if args.KEEP_PROTEIN_HYDROGENS:
+                rc("delete element.H")
+            else:
+                strip_hydrogens_from_terminal_protein_residues()
             if args.STRIP_IONS:
                 rc("delete ions")
             # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
@@ -124,23 +160,23 @@ if __name__ == "__main__":
         elif args.LIGAND == None and args.LIG_NET_CHARGE == None:
             net_charge = estimateFormalCharge(models[0].atoms)
         # Neutralize system
-        # print("DEBUG: net_charge=", net_charge)
         if args.NEUTRALIZE:
             if net_charge < 0:
                 initiateAddions(models, "Na+", str(abs(net_charge)), chimera.replyobj.status)
             elif net_charge > 0:
                 initiateAddions(models, "Cl-", str(net_charge), chimera.replyobj.status)
+
             if net_charge != 0:
                 # change the resids of the ions, which by default they are all 1
                 rc("sel ~ions")
-                existing_resids = [int(str(r.id).split('.')[0]) for r in currentResidues()]
+                existing_resids = [r.id.position for r in currentResidues()]
                 start = max(existing_resids) + 2
                 rc("resrenumber %i ions" % start)   # renumber the resids of the added ions
 
         if args.COMPLEX or args.LIGAND:
             # change the resid of the ligand
             rc('sel #3 & ~ #3:LIG')
-            existing_resids = [int(str(r.id).split('.')[0]) for r in currentResidues()]
+            existing_resids = [r.id.position for r in currentResidues()]
             start = max(existing_resids) + 2
             rc("resrenumber %i #3:LIG" % start)
             rc("combine #3 modelId 4")  # create a new molecule to split it into receptor and ligand
