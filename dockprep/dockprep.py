@@ -33,7 +33,8 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
     """)
     parser.add_argument("-complex", dest="COMPLEX", required=False, default=None, type=str,
                         help="pdb file with the holo form of the receptor.")
-    parser.add_argument("--charge-method", dest="CHARGE_METHOD", required=False, default='gas', type=str, choices=['gas', 'am1'],
+    parser.add_argument("--charge-method", dest="CHARGE_METHOD", required=False, default='gas', type=str,
+                        choices=['gas', 'am1'],
                         help="Method to calculate charges fo the ligand. Default: %(default)s")
     parser.add_argument("-neut", dest="NEUTRALIZE", required=False, default=False, action='store_true',
                         help="Neutralize the system by adding counter ions.")
@@ -161,15 +162,19 @@ if __name__ == "__main__":
 
         print("Preparing receptor for docking and calculating ligand '%s' charges (may be slow)." % args.CHARGE_METHOD)
         models = chimera.openModels.list(modelTypes=[chimera.Molecule]) # actually only one model is left
-        # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-        prep(models, nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
-        # NOTE: the default option addHFunc=AddH.hbondAddHydrogens raised an Error in Carbonic Unhydrase with the Zn+2 ion.
-        if args.LIGAND != None and args.LIG_NET_CHARGE != None:
+        if args.LIGAND and args.LIG_NET_CHARGE:
             net_charge = args.LIG_NET_CHARGE + rec_charge
-        elif args.LIGAND != None and args.LIG_NET_CHARGE == None:
+        elif args.LIGAND and args.LIG_NET_CHARGE == None:   # not args.LIG_NET_CHARGE doesn't work if 0
+            # Add partial charges again for initiateAddions() to function.
+            prep(models, nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
             net_charge = estimateFormalCharge(models[0].atoms)
-        elif args.LIGAND == None and args.LIG_NET_CHARGE == None:
+        elif not args.LIGAND and args.COMPLEX:
+            # Add partial charges again for initiateAddions() to function.
+            prep(models, nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
             net_charge = estimateFormalCharge(models[0].atoms)
+        elif not args.LIGAND and args.RECEPTOR:
+            net_charge = rec_charge
+
         # Neutralize system
         if args.NEUTRALIZE:
             if net_charge < 0:
