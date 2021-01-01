@@ -103,6 +103,16 @@ if __name__ == "__main__":
         from AddCharge import estimateFormalCharge, addNonstandardResCharges
         from chimera.selection import currentResidues
 
+
+        if args.KEEP_PROTEIN_HYDROGENS:
+            addHFunc = AddH.simpleAddHydrogens
+            # NOTE: addHFunc=None yields unrealistic net charges!
+        else:
+            addHFunc = AddH.hbondAddHydrogens
+            # NOTE: the default option addHFunc=AddH.hbondAddHydrogens raised an Error in Carbonic
+            # Unhydrase with the Zn+2 ion. However, is works better for some proteins, where AddH.simpleAddHydrogens
+            # leads to net_charge prediction of the order of 120...
+
         if args.COMPLEX:
             rc("open %s" % args.COMPLEX)  # load the protein-ligand complex
             if args.KEEP_PROTEIN_HYDROGENS:
@@ -120,7 +130,7 @@ if __name__ == "__main__":
             # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
             models = chimera.openModels.list(modelTypes=[chimera.Molecule])
             # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
+            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
             rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
             # Now that we calculated the charges of the protein and the ligand, we just need the complex
             rc("combine #1,2 modelId 3")  # create a new molecule containing the protein-ligand complex
@@ -128,8 +138,6 @@ if __name__ == "__main__":
             pdb = args.COMPLEX.replace(".pdb", "_prep.pdb")
         elif args.RECEPTOR and args.LIGAND:
             rc("open %s" % args.RECEPTOR)  # load the receptor
-            if args.KEEP_PROTEIN_HYDROGENS:
-                rc("delete element.H")
             standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # read function's definition to understand why is here
             rc("open %s" % args.LIGAND)  # load the ligand
             if args.STRIP_IONS:
@@ -137,8 +145,9 @@ if __name__ == "__main__":
             # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
             models = chimera.openModels.list(modelTypes=[chimera.Molecule])
             # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
+            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
             rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            print("Receptor's net charge =", rec_charge)
             rc("sel #1")  # select the ligand
             ligres = currentResidues()[0]
             ligres.type = 'LIG'  # change the resname of the ligand to 'LIG'
@@ -156,7 +165,7 @@ if __name__ == "__main__":
             # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
             models = chimera.openModels.list(modelTypes=[chimera.Molecule])
             # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
+            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
             rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
             pdb = os.path.splitext(os.path.basename(args.RECEPTOR))[0] + "_prep.pdb"
 
@@ -167,10 +176,12 @@ if __name__ == "__main__":
         elif args.LIGAND and args.LIG_NET_CHARGE == None:   # not args.LIG_NET_CHARGE doesn't work if 0
             # Add partial charges again for initiateAddions() to function.
             prep(models, nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
+            # NOTE: the default option addHFunc=AddH.hbondAddHydrogens raised an Error in Carbonic Unhydrase with the Zn+2 ion.
             net_charge = estimateFormalCharge(models[0].atoms)
         elif not args.LIGAND and args.COMPLEX:
             # Add partial charges again for initiateAddions() to function.
             prep(models, nogui=True, method=args.CHARGE_METHOD, addHFunc=AddH.simpleAddHydrogens)
+            # NOTE: the default option addHFunc=AddH.hbondAddHydrogens raised an Error in Carbonic Unhydrase with the Zn+2 ion.
             net_charge = estimateFormalCharge(models[0].atoms)
         elif not args.LIGAND and args.RECEPTOR:
             net_charge = rec_charge
