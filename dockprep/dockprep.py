@@ -53,6 +53,8 @@ pychimera $(which dockprep.py) -complex 3K5C-BACE_150_complex.pdb -cmethod gas -
                         help="Output PDB file name of the prepared protein-ligand complex.")
     parser.add_argument("-lignetcharge", dest="LIG_NET_CHARGE", required=False, default=None, type=int,
                         help="Optionaly (but RECOMMENDED) give the net charge of the ligand, otherwise it will be estimated by Chimera.")
+    parser.add_argument("-recnetcharge", dest="REC_NET_CHARGE", required=False, default=None, type=int,
+                        help="Optionaly (but RECOMMENDED) give the net charge of the receptor, otherwise it will be estimated by Chimera.")
     args = parser.parse_args()
     return args
 
@@ -127,11 +129,15 @@ if __name__ == "__main__":
             rc("combine #0.1 modelId 1")  # create a new molecule containing just the receptor
             rc("combine #0.2 modelId 2")  # create a new molecule containing just the ligand
             rc("del #0")
-            # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
-            models = chimera.openModels.list(modelTypes=[chimera.Molecule])
-            # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
-            rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            if args.REC_NET_CHARGE != None:
+                rec_charge = args.REC_NET_CHARGE
+            else:
+                # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
+                models = chimera.openModels.list(modelTypes=[chimera.Molecule])
+                # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
+                prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
+                rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            print("Receptor's net charge =", rec_charge)
             # Now that we calculated the charges of the protein and the ligand, we just need the complex
             rc("combine #1,2 modelId 3")  # create a new molecule containing the protein-ligand complex
             rc("del #1-2")
@@ -142,11 +148,14 @@ if __name__ == "__main__":
             rc("open %s" % args.LIGAND)  # load the ligand
             if args.STRIP_IONS:
                 rc("delete ions")
-            # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
-            models = chimera.openModels.list(modelTypes=[chimera.Molecule])
-            # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
-            rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            if args.REC_NET_CHARGE != None:
+                rec_charge = args.REC_NET_CHARGE
+            else:
+                # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
+                models = chimera.openModels.list(modelTypes=[chimera.Molecule])
+                # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
+                prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
+                rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
             print("Receptor's net charge =", rec_charge)
             rc("sel #1")  # select the ligand
             ligres = currentResidues()[0]
@@ -162,11 +171,15 @@ if __name__ == "__main__":
             standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
-            # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
-            models = chimera.openModels.list(modelTypes=[chimera.Molecule])
-            # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
-            prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
-            rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            if args.REC_NET_CHARGE != None:
+                rec_charge = args.REC_NET_CHARGE
+            else:
+                # We will estimate the receptor's net charge. For this we need to DockPrep the receptor (is fast).
+                models = chimera.openModels.list(modelTypes=[chimera.Molecule])
+                # For a full list of DockPrep options, look into file Chimera-alpha_py2.7/share/DockPrep/__init__.py
+                prep([models[0]], nogui=True, method=args.CHARGE_METHOD, addHFunc=addHFunc)
+                rec_charge = estimateFormalCharge(models[0].atoms)  # DockPred does not assign charges to receptor atoms, only to ligand atoms
+            print("Receptor's net charge =", rec_charge)
             pdb = os.path.splitext(os.path.basename(args.RECEPTOR))[0] + "_prep.pdb"
 
         print("Preparing receptor for docking and calculating ligand '%s' charges (may be slow)." % args.CHARGE_METHOD)
