@@ -119,7 +119,7 @@ if __name__ == "__main__":
             rc("open %s" % args.COMPLEX)  # load the protein-ligand complex
             if args.KEEP_PROTEIN_HYDROGENS:
                 rc("delete element.H")
-            standardize_terminal_protein_residues(args.COMPLEX,"#0")  # TODO: UNTESTED
+            # standardize_terminal_protein_residues(args.COMPLEX,"#0")  # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
             rc("split #0 ligands")
@@ -144,7 +144,7 @@ if __name__ == "__main__":
             pdb = args.COMPLEX.replace(".pdb", "_prep.pdb")
         elif args.RECEPTOR and args.LIGAND:
             rc("open %s" % args.RECEPTOR)  # load the receptor
-            standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # read function's definition to understand why is here
+            # standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # read function's definition to understand why is here
             rc("open %s" % args.LIGAND)  # load the ligand
             if args.STRIP_IONS:
                 rc("delete ions")
@@ -168,7 +168,7 @@ if __name__ == "__main__":
             rc("open %s" % args.RECEPTOR)  # load the receptor
             if args.KEEP_PROTEIN_HYDROGENS:
                 rc("delete element.H")
-            standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # TODO: UNTESTED
+            # standardize_terminal_protein_residues(args.RECEPTOR,"#0")  # TODO: UNTESTED
             if args.STRIP_IONS:
                 rc("delete ions")
             if args.REC_NET_CHARGE != None:
