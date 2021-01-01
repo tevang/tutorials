@@ -162,7 +162,7 @@ if __name__ == "__main__":
 
         print("Preparing receptor for docking and calculating ligand '%s' charges (may be slow)." % args.CHARGE_METHOD)
         models = chimera.openModels.list(modelTypes=[chimera.Molecule]) # actually only one model is left
-        if args.LIGAND and args.LIG_NET_CHARGE:
+        if args.LIGAND and args.LIG_NET_CHARGE != None: # args.LIG_NET_CHARGE doesn't work if 0
             net_charge = args.LIG_NET_CHARGE + rec_charge
         elif args.LIGAND and args.LIG_NET_CHARGE == None:   # not args.LIG_NET_CHARGE doesn't work if 0
             # Add partial charges again for initiateAddions() to function.
@@ -201,7 +201,7 @@ if __name__ == "__main__":
             rc("combine #4.2 modelId 6")  # create a new molecule containing just the ligand
             models = chimera.openModels.list(modelTypes=[chimera.Molecule])
             # for m in models: print(len(m.atoms), estimateFormalCharge(m.atoms)    # DEBUGGING
-            if args.LIG_NET_CHARGE:
+            if args.LIG_NET_CHARGE != None: # not args.LIG_NET_CHARGE doesn't work if 0
                 lig_charge = args.LIG_NET_CHARGE
             else:
                 lig_charge = estimateFormalCharge(models[3].atoms)
