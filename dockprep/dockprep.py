@@ -247,9 +247,9 @@ if __name__ == "__main__":
             s = f.read()
             f.seek(0)
             if args.COMPLEX or args.LIGAND:
-                f.write("# receptor net charge = %i\n# ligand net charge = %i\n" % (rec_charge, lig_charge))  # after system neutralization
+                f.write("HEADER receptor net charge = %i\nHEADER ligand net charge = %i\n" % (rec_charge, lig_charge))  # after system neutralization
             else:
-                f.write("# receptor net charge = %i\n" % (rec_charge))  # after system neutralization
+                f.write("HEADER receptor net charge = %i\n" % (rec_charge))  # after system neutralization
             f.write(s)
 
     except:
